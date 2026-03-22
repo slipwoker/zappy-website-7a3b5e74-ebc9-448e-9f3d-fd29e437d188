@@ -1,0 +1,1644 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow">
+    <title>תזונה מותאמת אישית — טבע הבריאה</title>
+    <meta name="description" content="Naamit Dagan is a clinical naturopath and herbalist specializing in women&#39;s health across all life cycles, operating under the brand &#39;Teva HaBria&#39; (Nature of Cr">
+    <meta name="keywords" content="תזונה מותאמת אישית, טבע הבריאה, נטורופתיה לאיזון הורמונלי נשים, טיפול טבעי בגיל המעבר">
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/favicon-48x48.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/assets/favicon-512x512.png">
+    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+    <!-- Zappy Analytics -->
+<script>
+(function() {
+  'use strict';
+  
+  // Configuration
+  var config = {
+    websiteId: '7a3b5e74-ebc9-448e-9f3d-fd29e437d188',
+    apiUrl: 'https://api.zappy5.com/api/analytics/track',
+    sessionDuration: 30 * 60 * 1000, // 30 minutes
+    visitorDuration: 30 * 24 * 60 * 60 * 1000, // 30 days
+    trackPageViews: true,
+    trackClicks: true,
+    trackFormSubmissions: true
+  };
+  
+  // Generate or retrieve persistent visitor ID (30 days)
+  function getVisitorId() {
+    var visitorKey = 'zappy_visitor_' + config.websiteId;
+    var visitor = null;
+    
+    try {
+      visitor = localStorage.getItem(visitorKey);
+      if (visitor) {
+        var visitorData = JSON.parse(visitor);
+        var now = Date.now();
+        
+        // Check if visitor ID is still valid (30 days)
+        if (now - visitorData.created < config.visitorDuration) {
+          // Update last seen timestamp
+          visitorData.lastSeen = now;
+          localStorage.setItem(visitorKey, JSON.stringify(visitorData));
+          return visitorData.id;
+        }
+      }
+    } catch (e) {
+      console.warn('Zappy Analytics: LocalStorage not available');
+    }
+    
+    // Generate new visitor ID
+    var newVisitorId = 'zv_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    
+    try {
+      localStorage.setItem(visitorKey, JSON.stringify({
+        id: newVisitorId,
+        created: Date.now(),
+        lastSeen: Date.now()
+      }));
+    } catch (e) {
+      // Continue without local storage
+    }
+    
+    return newVisitorId;
+  }
+  
+  // Generate or retrieve session ID (30 minutes)
+  function getSessionId() {
+    var sessionKey = 'zappy_session_' + config.websiteId;
+    var session = null;
+    
+    try {
+      session = sessionStorage.getItem(sessionKey);
+      if (session) {
+        var sessionData = JSON.parse(session);
+        var now = Date.now();
+        
+        // Check if session is still valid
+        if (now - sessionData.timestamp < config.sessionDuration) {
+          // Update timestamp
+          sessionData.timestamp = now;
+          sessionStorage.setItem(sessionKey, JSON.stringify(sessionData));
+          return sessionData.id;
+        }
+      }
+    } catch (e) {
+      console.warn('Zappy Analytics: SessionStorage not available');
+    }
+    
+    // Generate new session ID
+    var newSessionId = 'zs_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    
+    try {
+      sessionStorage.setItem(sessionKey, JSON.stringify({
+        id: newSessionId,
+        timestamp: Date.now()
+      }));
+    } catch (e) {
+      // Continue without session storage
+    }
+    
+    return newSessionId;
+  }
+  
+  var visitorId = getVisitorId();
+  var sessionId = getSessionId();
+  
+  // Track an event
+  function trackEvent(eventType, data) {
+    data = data || {};
+    
+    var eventData = {
+      website_id: config.websiteId,
+      event_type: eventType,
+      page_path: window.location.pathname,
+      referrer: document.referrer || 'direct',
+      visitor_id: visitorId,
+      session_id: sessionId,
+      metadata: data
+    };
+    
+    // Use sendBeacon if available (better for page unload events)
+    if (navigator.sendBeacon) {
+      var blob = new Blob([JSON.stringify(eventData)], { type: 'application/json' });
+      navigator.sendBeacon(config.apiUrl, blob);
+    } else {
+      // Fallback to fetch
+      fetch(config.apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(eventData),
+        keepalive: true
+      }).catch(function(error) {
+        console.warn('Zappy Analytics: Failed to track event', error);
+      });
+    }
+  }
+  
+  // Track page view
+  if (config.trackPageViews) {
+    trackEvent('pageview', {
+      title: document.title,
+      url: window.location.href
+    });
+  }
+  
+  // Track clicks on important elements
+  if (config.trackClicks) {
+    document.addEventListener('click', function(e) {
+      var target = e.target;
+      
+      // Track button clicks (counted as actions)
+      if (target.tagName === 'BUTTON' || target.closest('button')) {
+        var button = target.tagName === 'BUTTON' ? target : target.closest('button');
+        trackEvent('click', {
+          element: 'button',
+          text: button.textContent.trim().substring(0, 100),
+          id: button.id || null,
+          class: button.className || null
+        });
+      }
+      
+      // Track link clicks (navigation - not counted as actions)
+      else if (target.tagName === 'A' || target.closest('a')) {
+        var link = target.tagName === 'A' ? target : target.closest('a');
+        trackEvent('navigation', {
+          element: 'link',
+          text: link.textContent.trim().substring(0, 100),
+          href: link.href,
+          external: link.hostname !== window.location.hostname
+        });
+      }
+    }, true);
+  }
+  
+  // Track form submissions
+  if (config.trackFormSubmissions) {
+    document.addEventListener('submit', function(e) {
+      var form = e.target;
+      
+      trackEvent('form_submit', {
+        form_id: form.id || null,
+        form_name: form.name || null,
+        form_action: form.action || null,
+        form_method: form.method || 'GET'
+      });
+    }, true);
+  }
+  
+  // Track time on page (send on page unload)
+  var pageLoadTime = Date.now();
+  
+  window.addEventListener('beforeunload', function() {
+    var timeOnPage = Math.floor((Date.now() - pageLoadTime) / 1000); // in seconds
+    
+    trackEvent('page_unload', {
+      time_on_page: timeOnPage,
+      page_path: window.location.pathname
+    });
+  });
+  
+  // Expose tracking function globally for custom events
+  window.zappyAnalytics = {
+    track: trackEvent,
+    getVisitorId: function() { return visitorId; },
+    getSessionId: function() { return sessionId; }
+  };
+  
+})();
+</script>
+<!-- End Zappy Analytics -->
+    <meta property="og:title" content="תזונה מותאמת אישית — טבע הבריאה">
+  <meta property="og:description" content="Naamit Dagan is a clinical naturopath and herbalist specializing in women's health across all life cycles, operating under the brand 'Teva HaBria' (Nature of Cr">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="he_IL">
+  
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="תזונה מותאמת אישית — טבע הבריאה">
+  <meta name="twitter:description" content="Naamit Dagan is a clinical naturopath and herbalist specializing in women's health across all life cycles, operating under the brand 'Teva HaBria' (Nature of Cr">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/favicon-48x48.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/assets/favicon-512x512.png">
+    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+    <!-- Cookie Consent -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanilla-cookieconsent@3/dist/cookieconsent.css">
+    <script src="https://cdn.jsdelivr.net/npm/vanilla-cookieconsent@3/dist/cookieconsent.umd.js"></script>
+    <!-- Mickidum Accessibility Toolbar -->
+    <script src="https://cdn.jsdelivr.net/gh/mickidum/acc_toolbar/acctoolbar/acctoolbar.min.js"></script>
+    <link rel="stylesheet" href="/styles.css">
+
+    <style id="zappy-dropdown-submenu-styles">
+      /* ========== DESKTOP DROPDOWN SUBMENU STYLES ========== */
+      /* Base styles for dropdown submenus - parent must be positioned */
+      .nav-menu li:has(.sub-menu), nav li:has(.sub-menu), .navbar li:has(.sub-menu), #navMenu li:has(.sub-menu) { position: relative; }
+      /* Submenu base - hidden by default */
+      .nav-menu .sub-menu, nav .sub-menu, .navbar .sub-menu, #navMenu .sub-menu { display: block !important; position: absolute !important; top: 100%; left: 0; min-width: 220px; background: white; border-radius: 8px; box-shadow: 0 8px 25px rgba(0,0,0,0.15); padding: 8px 0; opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.3s ease; z-index: 1000; list-style: none; pointer-events: none; }
+      /* CRITICAL: Desktop hover styles to show dropdown */
+      .nav-menu li:hover > .sub-menu, nav li:hover > .sub-menu, .navbar li:hover > .sub-menu, #navMenu li:hover > .sub-menu { opacity: 1 !important; visibility: visible !important; transform: translateY(0) !important; pointer-events: auto !important; }
+      /* Submenu item styling */
+      .sub-menu li { list-style: none; margin: 0; padding: 0; }
+      .sub-menu a { display: block !important; padding: 10px 16px !important; color: var(--text-dark, #333) !important; font-weight: 500; text-decoration: none; white-space: nowrap; transition: background-color 0.2s; }
+      .sub-menu a:hover { background-color: #f5f5f5; }
+      /* RTL (Hebrew/Arabic) dropdown positioning */
+      [dir="rtl"] .nav-menu .sub-menu, [dir="rtl"] nav .sub-menu, [dir="rtl"] .navbar .sub-menu, html[lang="he"] .nav-menu .sub-menu, html[lang="he"] nav .sub-menu, html[lang="he"] .navbar .sub-menu, html[lang="ar"] .nav-menu .sub-menu, html[lang="ar"] nav .sub-menu, html[lang="ar"] .navbar .sub-menu { left: auto !important; right: 0 !important; }
+      /* Hide empty dropdown menus */
+      .sub-menu:empty, .sub-menu:not(:has(li:not(.zappy-hidden-menu-item))), .sub-menu:not(:has(li)) { display: none !important; opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; }
+      /* Desktop: show submenu on Menu Group hover */
+      li:has(.menu-group-title):hover > .sub-menu { opacity: 1 !important; visibility: visible !important; transform: translateY(0) !important; pointer-events: auto !important; }
+      /* Menu Group title styling */
+      .nav-menu > li > .menu-group-title, #navMenu > li > .menu-group-title { display: inline-block; padding: 0.5rem 1rem; cursor: default; user-select: none; }
+      
+      /* ========== MOBILE SUBMENU STYLES ========== */
+      @media (max-width: 768px) {
+        .nav-menu .sub-menu, nav .sub-menu, .navbar .sub-menu, #navMenu .sub-menu { position: static !important; transform: none !important; box-shadow: none !important; background: transparent !important; max-height: 0; overflow: hidden; opacity: 0; visibility: hidden; transition: max-height 0.3s ease, opacity 0.3s ease; padding: 0 !important; border-radius: 0 !important; }
+        .sub-menu.mobile-expanded { max-height: 500px !important; opacity: 1 !important; visibility: visible !important; padding: 8px 0 8px 16px !important; }
+        [dir="rtl"] .sub-menu.mobile-expanded, html[lang="he"] .sub-menu.mobile-expanded { padding: 8px 16px 8px 0 !important; }
+        /* Disable hover behavior on mobile */
+        .nav-menu li:hover > .sub-menu, nav li:hover > .sub-menu, .navbar li:hover > .sub-menu, #navMenu li:hover > .sub-menu { opacity: 0; visibility: hidden; pointer-events: none; }
+        .nav-menu li > .sub-menu.mobile-expanded, nav li > .sub-menu.mobile-expanded, .navbar li > .sub-menu.mobile-expanded, #navMenu li > .sub-menu.mobile-expanded { opacity: 1 !important; visibility: visible !important; pointer-events: auto !important; }
+        .nav-menu li:has(.sub-menu), nav li:has(.sub-menu), .navbar li:has(.sub-menu), #navMenu li:has(.sub-menu) { display: flex !important; flex-wrap: wrap !important; align-items: center !important; position: relative !important; min-height: 44px !important; }
+        .nav-menu li:has(.sub-menu) > a, nav li:has(.sub-menu) > a, .navbar li:has(.sub-menu) > a, #navMenu li:has(.sub-menu) > a { flex: 1 !important; min-width: 0 !important; }
+        .nav-menu li:has(.sub-menu) > .menu-group-title, nav li:has(.sub-menu) > .menu-group-title, .navbar li:has(.sub-menu) > .menu-group-title, #navMenu li:has(.sub-menu) > .menu-group-title { flex: 1 !important; min-width: 0 !important; padding: 0 !important; line-height: inherit !important; }
+        .nav-menu li:has(.sub-menu) > .sub-menu, nav li:has(.sub-menu) > .sub-menu, .navbar li:has(.sub-menu) > .sub-menu, #navMenu li:has(.sub-menu) > .sub-menu { flex-basis: 100% !important; width: 100% !important; }
+        .nav-menu li:has(.sub-menu) > a [class*="chevron"], .nav-menu li:has(.sub-menu) > a [class*="arrow"], .nav-menu li:has(.sub-menu) > a .fa-chevron-down, .nav-menu li:has(.sub-menu) > a .fa-angle-down, nav li:has(.sub-menu) > a [class*="chevron"], nav li:has(.sub-menu) > a [class*="arrow"], #navMenu li:has(.sub-menu) > a [class*="chevron"], #navMenu li:has(.sub-menu) > a [class*="arrow"] { display: none !important; visibility: hidden !important; }
+        .mobile-submenu-toggle { display: flex !important; align-items: center !important; justify-content: center !important; width: 44px !important; height: auto !important; background: transparent !important; border: none !important; cursor: pointer !important; color: var(--text-dark) !important; position: static !important; flex-shrink: 0 !important; align-self: stretch !important; z-index: 2 !important; padding: 0 !important; margin: 0 !important; }
+        .mobile-submenu-toggle::after { content: '' !important; width: 0 !important; height: 0 !important; border-left: 6px solid transparent !important; border-right: 6px solid transparent !important; border-top: 7px solid currentColor !important; transition: transform 0.3s ease !important; }
+        .mobile-submenu-toggle.expanded::after { transform: rotate(180deg) !important; }
+        .sub-menu a { padding: 10px 0 !important; display: block !important; color: var(--text-dark) !important; }
+        .navbar .sub-menu li a, nav.navbar .sub-menu li a, .zappy-products-dropdown .sub-menu a { color: var(--text-dark) !important; }
+      }
+      @media (min-width: 769px) { .mobile-submenu-toggle { display: none !important; } }
+    </style>
+
+    <style id="mobile-lang-menu-deployed-css">
+    @media (max-width: 768px) {
+      .lang-switcher,
+      .nav-cta-container .lang-switcher,
+      .nav-container .lang-switcher,
+      .navbar .lang-switcher,
+      .navbar .nav-cta-container .lang-switcher,
+      .nav-icons-left .lang-switcher,
+      .nav-ecommerce-icons .lang-switcher { display: none !important; }
+      .mobile-lang-menu { width: 100%; border-top: 1px solid rgba(128,128,128,0.2); padding: 8px 0 0 0; margin-top: 8px; }
+      .mobile-lang-toggle { display: flex !important; align-items: center; justify-content: space-between; width: 100%; padding: 12px 16px; background: none; border: none; cursor: pointer; font-size: 15px; color: inherit; font-family: inherit; }
+      .mobile-lang-toggle::after { content: ''; display: inline-block; width: 8px; height: 8px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(45deg); transition: transform 0.3s ease; margin-left: 8px; }
+      .mobile-lang-toggle.expanded::after { transform: rotate(-135deg); }
+      .mobile-lang-options { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+      .mobile-lang-options.expanded { max-height: 300px; }
+      .mobile-lang-option { display: flex !important; align-items: center; gap: 10px; padding: 10px 24px; text-decoration: none; color: inherit; font-size: 14px; font-family: inherit; }
+      .mobile-lang-option:hover { background: rgba(128,128,128,0.1); }
+      .mobile-lang-option.active { font-weight: 600; opacity: 0.7; pointer-events: none; }
+      .mobile-lang-option img { width: 20px; height: 20px; border-radius: 50%; }
+    }
+    @media (min-width: 769px) {
+      .mobile-lang-menu { display: none !important; }
+    }
+    </style>
+
+    <style id="zappy-widget-visibility">
+      #mic-access-tool-general-button, .mic-access-tool-general-button,
+      #mic-init-access-tool .mic-access-tool-general-button, #mic-init-access-tool #mic-access-tool-general-button,
+      ._access-icon, #mic-access-tool-box, .mic-access-tool-box,
+      #mic-init-access-tool #mic-access-tool-box, div[id*="mic-access-tool-box"], ._access-menu {
+        display: none !important; visibility: hidden !important; opacity: 0 !important; pointer-events: none !important;
+      }
+    </style>
+</head>
+<body>
+
+  <nav class="navbar" dir="rtl">
+  <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">
+    <svg class="hamburger-icon" width="24" height="24" viewbox="0 0 24 24" fill="none">
+      <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+    </svg>
+    <svg class="close-icon" width="24" height="24" viewbox="0 0 24 24" fill="none" style="display: none;">
+      <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+    </svg>
+  </button>
+
+  <button class="phone-header-btn" data-phone="[business_phone]" aria-label="Call">
+    <svg width="20" height="20" viewbox="0 0 24 24" fill="currentColor">
+      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+    </svg>
+  </button>
+
+  <div class="nav-container">
+    <div class="nav-right-group"><div class="nav-brand">
+      <a href="/" class="logo-link">
+        <img src="/assets/business-logo.webp" alt="טבע הבריאה" class="logo">
+      </a>
+    </div><ul class="nav-menu" id="navMenu"><li><a href="#services">טיפולים</a></li><li><a href="#about">אודות</a></li><li><a href="#process">תהליך</a></li><li><a href="#testimonials">המלצות</a></li><li><a href="#stats">נתונים</a></li></ul></div>
+
+    
+
+    <div class="nav-cta-container">
+      <a href="#contact" class="nav-cta-btn">צור קשר</a>
+    </div>
+  </div>
+</nav>
+<script>
+
+// Navbar Mobile Menu Toggle and Contrast Fix
+(function() {
+  // Use 'load' event instead of 'DOMContentLoaded' to ensure we run AFTER all other scripts
+  window.addEventListener('load', function() {
+    
+    // FIX MOBILE BUTTON CONTRAST
+    // Detect navbar background color and apply contrasting color to mobile buttons
+    const navbar = document.querySelector('.navbar, nav, header');
+    if (!navbar) {
+      console.log('[Navbar] Navbar element not found');
+      return;
+    }
+    
+    // DECLARE VARIABLES EARLY to avoid Temporal Dead Zone errors
+    // These are used in multiple places below
+    let mobileToggle = document.getElementById('mobileToggle') ||
+                       document.querySelector('.mobile-toggle') ||
+                       document.querySelector('.hamburger') ||
+                       document.querySelector('.hamburger-menu') ||
+                       document.querySelector('.menu-toggle') ||
+                       document.querySelector('.burger-menu') ||
+                       document.querySelector('[aria-label="Menu"]') ||
+                       document.querySelector('[aria-label="תפריט"]');
+    
+    const phoneBtn = document.querySelector('.phone-header-btn');
+    
+    const computedStyle = window.getComputedStyle(navbar);
+    let bgColor = computedStyle.backgroundColor;
+    
+    console.log('[Navbar] Initial navbar background:', bgColor);
+    
+    // Check if background is transparent or rgba with 0 alpha
+    const isTransparent = bgColor === 'transparent' || 
+                         bgColor === 'rgba(0, 0, 0, 0)' ||
+                         (bgColor.startsWith('rgba') && bgColor.includes(', 0)'));
+    
+    if (isTransparent) {
+      // Check for background-image or gradient
+      const bgImage = computedStyle.backgroundImage;
+      if (bgImage && bgImage !== 'none') {
+        console.log('[Navbar] Navbar has background image/gradient, using dark text');
+        bgColor = 'rgb(240, 240, 240)'; // Assume light background
+      } else {
+        // Transparent navbar - check body background
+        const bodyBg = window.getComputedStyle(document.body).backgroundColor;
+        console.log('[Navbar] Navbar transparent, using body background:', bodyBg);
+        bgColor = bodyBg;
+      }
+    }
+    
+    // Calculate luminance to determine if background is light or dark
+    const rgb = bgColor.match(/\d+/g);
+    if (rgb && rgb.length >= 3) {
+      const r = parseInt(rgb[0]);
+      const g = parseInt(rgb[1]);
+      const b = parseInt(rgb[2]);
+      const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+      
+      // Mobile button colors are set by Claude's AI-generated CSS (same as .nav-menu a)
+      // No dynamic color overrides needed - colors come from the generated navbar CSS
+      console.log('[Navbar] Mobile button colors preserved from Claude CSS (luminance:', luminance.toFixed(2) + ')');
+      
+      // FIX ICON SIZES - Ensure SVGs are properly sized and visible
+      // INJECT CRITICAL CSS TO OVERRIDE ANY CONFLICTING RULES
+      const criticalCSS = document.createElement('style');
+      criticalCSS.id = 'zappy-mobile-nav-fix';
+      const htmlLang = document.documentElement.lang || 'en';
+      const htmlDir = document.documentElement.dir || 'ltr';
+      // Check both dir attribute AND lang for RTL detection
+      // dir="rtl" is the most reliable indicator
+      const isRTL = htmlDir === 'rtl' || htmlLang === 'he' || htmlLang === 'ar';
+      
+      criticalCSS.textContent = `
+        /* Hide mobile buttons on desktop, show only on mobile */
+        @media (min-width: 769px) {
+          .mobile-toggle,
+          .phone-header-btn {
+            display: none !important;
+          }
+        }
+        
+        /* Show and position mobile buttons correctly on mobile */
+        @media (max-width: 768px) {
+          .mobile-toggle,
+          .phone-header-btn {
+            position: absolute !important;
+            top: 50% !important;
+            transform: translateY(-50%) !important;
+            z-index: 1001 !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            width: 36px !important;
+            height: 36px !important;
+            border-radius: 50% !important;
+            border: none !important;
+            cursor: pointer !important;
+            padding: 6px !important;
+            background: none !important;
+            color: var(--nav-text, var(--text-dark)) !important;
+          }
+          
+          /* LTR positioning (default): hamburger LEFT, phone RIGHT */
+          html:not([dir="rtl"]):not([lang="he"]):not([lang="ar"]) .mobile-toggle,
+          html[dir="ltr"] .mobile-toggle {
+            left: 12px !important;
+            right: auto !important;
+          }
+          html:not([dir="rtl"]):not([lang="he"]):not([lang="ar"]) .phone-header-btn,
+          html[dir="ltr"] .phone-header-btn {
+            right: 12px !important;
+            left: auto !important;
+          }
+          
+          /* RTL positioning: hamburger RIGHT, phone LEFT */
+          html[dir="rtl"] .mobile-toggle,
+          html[lang="he"] .mobile-toggle,
+          html[lang="ar"] .mobile-toggle {
+            right: 12px !important;
+            left: auto !important;
+          }
+          html[dir="rtl"] .phone-header-btn,
+          html[lang="he"] .phone-header-btn,
+          html[lang="ar"] .phone-header-btn {
+            left: 12px !important;
+            right: auto !important;
+          }
+          
+          /* CRITICAL: Ensure nav-container has min-height on mobile */
+          /* All children are positioned absolutely/fixed on mobile, so height:auto collapses to 0 */
+          .nav-container {
+            min-height: 70px !important;
+            position: relative !important;
+          }
+          
+          /* Ensure SVG icons are properly sized and inherit color */
+          .mobile-toggle svg,
+          .phone-header-btn svg {
+            width: 24px !important;
+            height: 24px !important;
+            /* Don't force display - let JavaScript control hamburger/close toggle */
+          }
+          
+          /* Reset nav-cta-container on mobile - remove desktop box-shadow/padding */
+          /* that creates a visible ghost box when CTA button is hidden */
+          .nav-cta-container {
+            box-shadow: none !important;
+            padding: 0 !important;
+          }
+          
+          /* Hide nav-cta-container entirely on mobile when there's no lang-switcher */
+          /* (only the CTA button is inside, and it's hidden on mobile) */
+          .nav-cta-container:not(:has(.lang-switcher)) {
+            display: none !important;
+          }
+          
+          /* CRITICAL: Prevent hero image fade gradient from bleeding over headline text */
+          /* The .image-fade-gradient has bottom: -30px (extends below parent) */
+          /* On mobile stacked layout, this overlaps the h1 text below the image */
+          .hero-image-column {
+            overflow: hidden !important;
+          }
+          .image-fade-gradient {
+            bottom: 0 !important;
+          }
+          
+          /* Hide desktop language switcher on mobile - hamburger menu handles it */
+          /* High specificity to override stored CSS */
+          .lang-switcher,
+          .nav-cta-container .lang-switcher,
+          .nav-container .lang-switcher,
+          .navbar .lang-switcher,
+          .navbar .nav-cta-container .lang-switcher {
+            display: none !important;
+          }
+        }
+      `;
+      
+      // Remove existing fix if present and inject new one
+      const existing = document.getElementById('zappy-mobile-nav-fix');
+      if (existing) existing.remove();
+      document.head.appendChild(criticalCSS);
+      
+      console.log('[Navbar] Critical CSS injected for mobile nav positioning');
+      
+      // ONLY apply inline positioning styles on mobile viewport
+      // On desktop, the CSS handles hiding these buttons with display: none
+      // Inline styles were breaking desktop layout by overriding CSS
+      const isMobileViewport = window.innerWidth <= 768;
+      
+      if (mobileToggle) {
+        // Icon sizing applies to all viewports for consistency
+        const hamburgerIcon = mobileToggle.querySelector('.hamburger-icon');
+        const closeIcon = mobileToggle.querySelector('.close-icon');
+        
+        if (hamburgerIcon) {
+          hamburgerIcon.style.setProperty('width', '24px', 'important');
+          hamburgerIcon.style.setProperty('height', '24px', 'important');
+          hamburgerIcon.style.setProperty('display', 'block', 'important'); // Show hamburger by default
+        }
+        if (closeIcon) {
+          closeIcon.style.setProperty('width', '24px', 'important');
+          closeIcon.style.setProperty('height', '24px', 'important');
+          closeIcon.style.setProperty('display', 'none', 'important'); // Hide close icon by default
+        }
+        
+        // ONLY set positioning inline styles on mobile
+        if (isMobileViewport) {
+          mobileToggle.style.setProperty('position', 'absolute', 'important');
+          mobileToggle.style.setProperty('top', '50%', 'important');
+          mobileToggle.style.setProperty('transform', 'translateY(-50%)', 'important');
+          mobileToggle.style.setProperty('z-index', '1001', 'important');
+          
+          // Clear any inline left/right so CSS can take over based on html[dir]
+          mobileToggle.style.removeProperty('left');
+          mobileToggle.style.removeProperty('right');
+          
+          console.log('[Navbar] Mobile toggle positioning applied (mobile viewport)');
+        } else {
+          // On desktop, clear any positioning styles to let CSS handle it
+          mobileToggle.style.removeProperty('position');
+          mobileToggle.style.removeProperty('top');
+          mobileToggle.style.removeProperty('transform');
+          mobileToggle.style.removeProperty('z-index');
+          mobileToggle.style.removeProperty('left');
+          mobileToggle.style.removeProperty('right');
+          console.log('[Navbar] Desktop viewport - cleared mobile toggle inline positioning');
+        }
+      }
+      
+      if (phoneBtn) {
+        // Icon sizing applies to all viewports
+        const phoneIcon = phoneBtn.querySelector('svg');
+        if (phoneIcon) {
+          phoneIcon.style.width = '24px';
+          phoneIcon.style.height = '24px';
+          phoneIcon.setAttribute('width', '24');
+          phoneIcon.setAttribute('height', '24');
+        }
+        
+        // ONLY set positioning inline styles on mobile
+        if (isMobileViewport) {
+          phoneBtn.style.setProperty('position', 'absolute', 'important');
+          phoneBtn.style.setProperty('top', '50%', 'important');
+          phoneBtn.style.setProperty('transform', 'translateY(-50%)', 'important');
+          phoneBtn.style.setProperty('z-index', '1001', 'important');
+          
+          // Clear any inline left/right so CSS can take over based on html[dir]
+          phoneBtn.style.removeProperty('left');
+          phoneBtn.style.removeProperty('right');
+          
+          console.log('[Navbar] Phone button positioning applied (mobile viewport)');
+        } else {
+          // On desktop, clear any positioning styles to let CSS handle it
+          phoneBtn.style.removeProperty('position');
+          phoneBtn.style.removeProperty('top');
+          phoneBtn.style.removeProperty('transform');
+          phoneBtn.style.removeProperty('z-index');
+          phoneBtn.style.removeProperty('left');
+          phoneBtn.style.removeProperty('right');
+          console.log('[Navbar] Desktop viewport - cleared phone button inline positioning');
+        }
+      }
+    } else {
+      console.log('[Navbar] Could not parse background color:', bgColor);
+    }
+    
+    // MOBILE MENU TOGGLE
+    // Re-query in case DOM changed (mobileToggle already declared at top of function)
+    mobileToggle = document.getElementById('mobileToggle') ||
+                   document.querySelector('.mobile-toggle') ||
+                   document.querySelector('.hamburger') ||
+                   document.querySelector('.hamburger-menu') ||
+                   document.querySelector('.menu-toggle') ||
+                   document.querySelector('.burger-menu') ||
+                   document.querySelector('[aria-label="Menu"]') ||
+                   document.querySelector('[aria-label="תפריט"]');
+    
+    // EXPANDED SEARCH: Find nav menu by ID or class
+    const navMenu = document.getElementById('navMenu') ||
+                  document.querySelector('.nav-menu') ||
+                  document.querySelector('.nav-links') ||
+                  document.querySelector('nav ul:not(.submenu)');
+    
+    if (!mobileToggle || !navMenu) {
+      console.log('[Navbar] Mobile toggle or menu not found:', { toggle: !!mobileToggle, menu: !!navMenu });
+      return;
+    }
+    
+    // Ensure navMenu has ID for CSS targeting
+    if (!navMenu.id) {
+      navMenu.id = 'navMenu';
+    }
+    
+    console.log('[Navbar] Initializing mobile menu...');
+    
+    // Remove any existing event listeners by cloning the button
+    const newToggle = mobileToggle.cloneNode(true);
+    mobileToggle.parentNode.replaceChild(newToggle, mobileToggle);
+    
+    // Toggle menu on button click - use newToggle now
+    newToggle.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      
+      const hamburgerIcon = this.querySelector('.hamburger-icon');
+      const closeIcon = this.querySelector('.close-icon');
+      const isActive = navMenu.classList.contains('active');
+      
+      if (isActive) {
+        // Close menu
+        navMenu.classList.remove('active');
+        if (hamburgerIcon) hamburgerIcon.style.setProperty('display', 'block', 'important');
+        if (closeIcon) closeIcon.style.setProperty('display', 'none', 'important');
+        document.body.style.overflow = '';
+        console.log('[Navbar] Menu closed');
+      } else {
+        // Open menu
+        navMenu.classList.add('active');
+        if (hamburgerIcon) hamburgerIcon.style.setProperty('display', 'none', 'important');
+        if (closeIcon) closeIcon.style.setProperty('display', 'block', 'important');
+        document.body.style.overflow = 'hidden';
+        console.log('[Navbar] Menu opened');
+      }
+    });
+    
+    // Close menu when clicking nav links (but NOT dropdown toggles)
+    const navLinks = navMenu.querySelectorAll('a');
+    navLinks.forEach(function(link) {
+      link.addEventListener('click', function() {
+        // Don't close if it's a dropdown child (unless it's a real navigation link)
+        if (this.getAttribute('href') === '#') return;
+        
+        const hamburgerIcon = newToggle.querySelector('.hamburger-icon');
+        const closeIcon = newToggle.querySelector('.close-icon');
+        
+        navMenu.classList.remove('active');
+        if (hamburgerIcon) hamburgerIcon.style.setProperty('display', 'block', 'important');
+        if (closeIcon) closeIcon.style.setProperty('display', 'none', 'important');
+        document.body.style.overflow = '';
+        console.log('[Navbar] Menu closed (link clicked)');
+      });
+    });
+    
+    // DROPDOWN MENU TOGGLE (for mobile and touch devices)
+    var dropdownToggles = navMenu.querySelectorAll('.dropdown-toggle');
+    dropdownToggles.forEach(function(toggle) {
+      toggle.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var parent = this.closest('.nav-dropdown');
+        if (!parent) return;
+        
+        // Close other open dropdowns at the same level
+        var siblings = parent.parentNode.querySelectorAll('.nav-dropdown.open');
+        siblings.forEach(function(sib) {
+          if (sib !== parent) sib.classList.remove('open');
+        });
+        
+        parent.classList.toggle('open');
+        console.log('[Navbar] Dropdown toggled:', parent.classList.contains('open') ? 'open' : 'closed');
+      });
+    });
+    
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.nav-dropdown')) {
+        var openDropdowns = document.querySelectorAll('.nav-dropdown.open');
+        openDropdowns.forEach(function(dd) { dd.classList.remove('open'); });
+      }
+    });
+    
+    console.log('[Navbar] Dropdown handlers initialized for ' + dropdownToggles.length + ' dropdowns');
+    
+    // Phone button functionality (phoneBtn already declared at top of function)
+    if (phoneBtn) {
+      phoneBtn.addEventListener('click', function() {
+        // Get phone number from placeholder in page or use default
+        const phoneLinks = document.querySelectorAll('a[href^="tel:"]');
+        const phoneNumber = phoneLinks.length > 0 
+          ? phoneLinks[0].getAttribute('href').replace('tel:', '')
+          : '[business_phone]';
+        
+        window.location.href = 'tel:' + phoneNumber;
+        console.log('[Navbar] Phone button clicked');
+      });
+    }
+    
+    console.log('[Navbar] Mobile menu initialized successfully');
+    
+    // === WHATSAPP BUTTON VISIBILITY FIX ===
+    // Ensure WhatsApp floating button is hidden on desktop and visible on mobile
+    // IMPORTANT: Only target the floating button by its class, NOT generic wa.me links
+    const handleWhatsAppVisibility = function() {
+      const whatsappBtn = document.querySelector('.whatsapp-float');
+      if (whatsappBtn) {
+        const isDesktop = window.innerWidth >= 769;
+        if (isDesktop) {
+          whatsappBtn.style.setProperty('display', 'none', 'important');
+          whatsappBtn.style.setProperty('visibility', 'hidden', 'important');
+          whatsappBtn.style.setProperty('opacity', '0', 'important');
+          whatsappBtn.style.setProperty('pointer-events', 'none', 'important');
+          console.log('[WhatsApp] Button hidden on desktop');
+        } else {
+          whatsappBtn.style.removeProperty('display');
+          whatsappBtn.style.removeProperty('visibility');
+          whatsappBtn.style.removeProperty('opacity');
+          whatsappBtn.style.removeProperty('pointer-events');
+          console.log('[WhatsApp] Button visible on mobile');
+        }
+      }
+    };
+    
+    // Run on load
+    handleWhatsAppVisibility();
+    
+    // Run on resize with debouncing
+    let resizeTimer;
+    window.addEventListener('resize', function() {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(handleWhatsAppVisibility, 100);
+    });
+  });
+})();
+
+</script>
+  
+  <main>
+    <section id="hero" class="index-hero-section" data-layout-spec="בית-hero" dir="rtl" data-hero-type="fullscreen-scrim">
+  <!-- Background Image -->
+  <div class="index-hero-bg">
+    <img data-hero-bg="true" data-placeholder="index-hero-image-1" data-context="A luminous, warm lifestyle photograph for a natural health and alternative medicine clinic. Scene shows a wooden table with fresh green herbs (rosemary, lavender, chamomile), a steaming ceramic cup of herbal tea, small amber glass bottles of essential oils, and soft natural daylight streaming through a window. Warm golden tones, soft bokeh background, calm and feminine consultation atmosphere. Color palette: warm creams, sage greens, dusty rose. Horizontal wide format, high quality, editorial style." width="1440" height="900" src="/assets/site-index-hero-image-1.webp" alt="אווירה טבעית ומרפאה - עשבי תיבול, תה צמחים ואור טבעי חם">
+  </div>
+
+  <!-- Scrim Overlay -->
+  <div class="index-hero-scrim" aria-hidden="true"></div>
+
+  <!-- Content Card -->
+  <div class="index-hero-container">
+    <div class="index-hero-card">
+      <span class="index-hero-eyebrow">טבע הבריאה | נעמית דגן, נטורופתית קלינית</span>
+      <h1 class="index-hero-h1">בריאות טבעית לאישה<br>בכל מעגלי החיים</h1>
+      <h3 class="index-hero-subtitle">נעמית דגן, נטורופתית קלינית ורוקחת צמחים, מלווה נשים עם חוסר איזון הורמונלי, אי-סדירות במחזור, PCOS, קשיי פוריות וגיל המעבר — דרך תזונה מותאמת אישית, צמחי מרפא, ורפואה הוליסטית של גוף ונפש.</h3>
+      <div class="index-hero-ctas">
+        <a href="#contact" class="index-hero-btn-primary">להתחלת ייעוץ אישי</a>
+        <a href="#treatments" class="index-hero-btn-secondary">לתהליך הטיפול</a>
+      </div>
+      <p class="index-hero-trust">טבע הבריאה — תכנית טיפול אישית ומדויקת לכל אישה</p>
+    </div>
+  </div>
+
+  <!-- Bottom Divider -->
+  <div class="index-hero-divider-wrapper">
+    <svg data-no-icon-edit="true" aria-hidden="true" viewbox="0 0 1440 72" preserveaspectratio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,72 L0,38 Q120,22 240,34 T480,28 Q600,22 720,32 T960,26 Q1080,20 1200,30 T1440,34 L1440,72 Z" fill="#F5EDE4"></path>
+    </svg>
+  </div>
+</section>
+
+<section id="services" class="index-services-section" data-layout-spec="בית-services" dir="rtl">
+  <div class="index-services-container">
+    <div class="index-services-intro">
+      <span class="index-services-eyebrow">תחומי הטיפול</span>
+      <h2 class="index-services-title">איזון, פוריות ובריאות הורמונלית<br>לאורך כל מעגלי החיים</h2>
+      <p class="index-services-subtitle">כל אישה היא עולם שלם. הטיפול מותאם אישית לצרכייך, לגופך ולשלב שבו את נמצאת — עם כלים טבעיים שמחזירים את האיזון ואת הכוח הפנימי.</p>
+    </div>
+
+    <div class="index-services-grid">
+
+      <article class="index-services-card">
+        <div class="index-services-icon-badge">
+          <svg data-element-type="icon" data-icon-type="svg" width="28" height="28" viewbox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="14" cy="14" r="9" stroke="currentColor" stroke-width="1.4"></circle>
+            <path d="M14 8v6l3.5 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"></path>
+            <path d="M7 14c0-3.866 3.134-7 7-7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-dasharray="2 2"></path>
+          </svg>
+        </div>
+        <div class="index-services-card-content">
+          <h3>איזון הורמונלי</h3>
+          <p>עייפות, מצבי רוח משתנים, עלייה במשקל או קשיי שינה — לרוב מאחוריהם חוסר איזון הורמונלי. נבנה יחד תוכנית טבעית שמחזירה את הגוף לקצב שלו, באמצעות תזונה מותאמת אישית, צמחי מרפא ועבודה עמוקה עם הגוף.</p>
+        </div>
+      </article>
+
+      <article class="index-services-card">
+        <div class="index-services-icon-badge">
+          <svg data-element-type="icon" data-icon-type="svg" width="28" height="28" viewbox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M14 4c0 0-7 5.5-7 11a7 7 0 0014 0C21 9.5 14 4 14 4z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"></path>
+            <path d="M14 12v5M11.5 14.5l2.5-2.5 2.5 2.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </div>
+        <div class="index-services-card-content">
+          <h3>ווסת לא סדירה</h3>
+          <p>מחזור כואב, לא סדיר, כבד מדי או נעדר — הגוף שולח אותות שראוי להקשיב להם. הטיפול מאתר את שורש חוסר האיזון ומסייע לשחזר מחזור בריא, ללא תופעות לוואי.</p>
+        </div>
+      </article>
+
+      <article class="index-services-card">
+        <div class="index-services-icon-badge">
+          <svg data-element-type="icon" data-icon-type="svg" width="28" height="28" viewbox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <ellipse cx="14" cy="16" rx="6" ry="5" stroke="currentColor" stroke-width="1.4"></ellipse>
+            <path d="M14 11V7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"></path>
+            <path d="M10.5 8.5c1-2 5.5-2 7 0" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"></path>
+            <circle cx="14" cy="5.5" r="1.2" fill="currentColor"></circle>
+          </svg>
+        </div>
+        <div class="index-services-card-content">
+          <h3>תמיכה בפוריות</h3>
+          <p>כשההריון לא מגיע בקלות, הגוף והנפש זקוקים לתמיכה מכל הכיוונים. הטיפול הנטורופתי מכין את הרחם, מאזן את הורמוני הפוריות ומחזק את הגוף — לצד ליווי רגשי חם לאורך כל הדרך.</p>
+        </div>
+      </article>
+
+      <article class="index-services-card">
+        <div class="index-services-icon-badge">
+          <svg data-element-type="icon" data-icon-type="svg" width="28" height="28" viewbox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M8 20c0-5 2-8 6-9.5C18 9 20 11 20 14c0 4-2.5 7-6 7s-6-3-6-7z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"></path>
+            <path d="M14 10.5V7M11 8l3-3 3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M11 16c.5 1.5 1.5 2.5 3 2.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"></path>
+          </svg>
+        </div>
+        <div class="index-services-card-content">
+          <h3>תסמונת שחלות פוליציסטיות (PCOS)</h3>
+          <p>PCOS משפיעה על מחזור, משקל, עור ופוריות — ולעיתים קרובות נותרת ללא מענה מספק. בעזרת נטורופתיה לאיזון הורמונלי נשים, נטפל בשורש הבעיה ונשפר את איכות החיים באופן מורגש.</p>
+        </div>
+      </article>
+
+      <article class="index-services-card">
+        <div class="index-services-icon-badge">
+          <svg data-element-type="icon" data-icon-type="svg" width="28" height="28" viewbox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M6 20c2-4 4-6 8-6s6 2 8 6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"></path>
+            <circle cx="14" cy="11" r="4" stroke="currentColor" stroke-width="1.4"></circle>
+            <path d="M19 9c1.5 0 3 1 3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-dasharray="2 2"></path>
+            <path d="M9 9c-1.5 0-3 1-3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-dasharray="2 2"></path>
+          </svg>
+        </div>
+        <div class="index-services-card-content">
+          <h3>גיל המעבר ופרי-מנופאוזה</h3>
+          <p>גלי חום, הפרעות שינה, שינויים במצב הרוח — גיל המעבר הוא מעבר, לא מחלה. הטיפול הטבעי בגיל המעבר מרכך את התסמינים, תומך בעצמות ובלב, ומסייע לעבור את השלב הזה בנחת ובכוח.</p>
+        </div>
+      </article>
+
+      <article class="index-services-card">
+        <div class="index-services-icon-badge">
+          <svg data-element-type="icon" data-icon-type="svg" width="28" height="28" viewbox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="5" y="7" width="18" height="14" rx="3" stroke="currentColor" stroke-width="1.4"></rect>
+            <path d="M9 7V5.5a1.5 1.5 0 013 0V7M16 7V5.5a1.5 1.5 0 013 0V7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"></path>
+            <path d="M9 13h10M9 17h6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"></path>
+          </svg>
+        </div>
+        <div class="index-services-card-content">
+          <h3>תוכנית טיפול מותאמת אישית</h3>
+          <p>אין שתי נשים זהות. לכל מפגש קודמת אנמנזה מעמיקה, ניתוח בדיקות דם וראיה הוליסטית של הגוף והנפש. התוצאה: תוכנית טבע הבריאה שמיועדת רק לך — תזונה, צמחי מרפא, פרחי באך, ארומתרפיה ועוד.</p>
+        </div>
+      </article>
+
+    </div>
+  </div>
+
+  <div class="index-services-divider-wrapper" aria-hidden="true">
+    <svg data-no-icon-edit="true" aria-hidden="true" viewbox="0 0 1200 48" preserveaspectratio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,48 L0,22 Q60,14 120,20 T240,16 Q300,20 360,13 T480,18 Q540,14 600,20 T720,15 Q780,20 840,13 T960,18 Q1020,14 1080,20 T1200,16 L1200,48 Z" fill="#FBF8F4"></path>
+    </svg>
+  </div>
+</section>
+
+<section id="about" class="index-about-section" data-layout-spec="בית-about" dir="rtl">
+  <div class="index-about-container">
+    <div class="index-about-grid">
+
+      <!-- Content Column (START = RIGHT in RTL) -->
+      <div class="index-about-content">
+        <span class="index-about-eyebrow">אודות טבע הבריאה</span>
+        <h2 class="index-about-heading">נעמית דגן — נטורופתיה קלינית<br>מתוך לב, לאורך כל מעגלי החיים</h2>
+        <p class="index-about-para">אני מאמינה שבריאות אמיתית היא הסמכה עצמית עמוקה ביותר. כאשר אישה שרויה בבריאות ובחיוניות — היא פורחת מבפנים. בטבע הבריאה, כל אישה מלווה כאדם שלם: גוף, נפש ורוח, בכל שלב ושלב במסע חייה — מגיל הפוריות ועד גיל המעבר.</p>
+        <p class="index-about-para">בעזרת תזונה מותאמת אישית, צמחי מרפא, טיפולים משלימים ועומק קליני, אני מציעה מסגרת טיפולית שמכבדת את הייחודיות של כל אישה. כל תוכנית נבנית מאפס, בהקשבה מלאה, ומתאימה את עצמה לצרכים המשתנים לאורך הדרך.</p>
+
+        <!-- Value Blocks -->
+        <div class="index-about-values">
+          <div class="index-about-value-item">
+            <div class="index-about-value-icon">
+              <svg data-element-type="icon" data-icon-type="svg" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"></path><path d="M12 8v4l3 3"></path></svg>
+            </div>
+            <div class="index-about-value-text">
+              <h3>תוכנית טיפולית אישית לחלוטין</h3>
+              <p>כל לקוחה מקבלת תוכנית מותאמת הבנויה אך ורק עבורה — בהתאם לסיפורה, גופה וצרכיה המיוחדים.</p>
+            </div>
+          </div>
+
+          <div class="index-about-value-item">
+            <div class="index-about-value-icon">
+              <svg data-element-type="icon" data-icon-type="svg" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"></rect><path d="M9 9h6M9 12h6M9 15h4"></path></svg>
+            </div>
+            <div class="index-about-value-text">
+              <h3>עומק קליני וניתוח בדיקות דם</h3>
+              <p>אינטייק מעמיק, קריאת ממצאים רפואיים ובדיקות מעבדה — לאבחון מדויק ולתמיכה מבוססת ראיות.</p>
+            </div>
+          </div>
+
+          <div class="index-about-value-item">
+            <div class="index-about-value-icon">
+              <svg data-element-type="icon" data-icon-type="svg" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="M9 12l2 2 4-4"></path></svg>
+            </div>
+            <div class="index-about-value-text">
+              <h3>גישה הוליסטית — גוף, נפש וטבע</h3>
+              <p>שילוב של צמחי מרפא, ארומתרפיה, דמיון מודרך, פרחי באך ורפלקסולוגיה — שיטה שמתאימה עצמה לכל שלב בחיים.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Imagery Column (END = LEFT in RTL) -->
+      <div class="index-about-imagery">
+        <div class="index-about-main-image-wrap">
+          <img data-placeholder="index-about-image-1" data-context="A warm, intimate portrait of a female naturopath and herbalist in a bright consultation room. She is sitting at a wooden desk surrounded by glass jars of dried herbs, a cup of herbal tea, and botanical reference books. Soft natural light filters through sheer curtains. The mood is calm, professional, and deeply feminine. Warm cream and sage green tones throughout. She appears approachable and knowledgeable." src="/assets/site-index-about-image-1.webp" width="480" height="620" alt="נעמית דגן, נטורופתית קלינית — ייעוץ אישי בטבע הבריאה" class="index-about-main-img">
+        </div>
+        <div class="index-about-secondary-image-wrap">
+          <img data-placeholder="index-about-image-2" data-context="A close-up flat-lay of natural healing elements: dried chamomile and lavender flowers, small amber glass bottles of essential oils, a handwritten consultation notepad, a ceramic mortar and pestle with crushed herbs, and a cup of herbal infusion. Warm cream background with soft shadows. Botanical and artisanal aesthetic." src="/assets/site-index-about-image-2.webp" width="220" height="200" alt="צמחי מרפא, שמנים אתריים ורישומי ייעוץ — כלי העבודה של נטורופתיה טבעית" class="index-about-secondary-img">
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Bottom botanical divider -->
+  <div class="index-about-divider-wrapper" aria-hidden="true">
+    <svg data-no-icon-edit="true" aria-hidden="true" viewbox="0 0 1200 90" preserveaspectratio="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Botanical line-art band -->
+      <g opacity="0.18" stroke="#A9B89B" stroke-width="1" fill="none">
+        <path d="M80,40 Q100,20 120,35 Q140,50 160,30 Q180,10 200,38"></path>
+        <path d="M120,38 Q130,25 140,38"></path>
+        <path d="M160,30 Q170,18 180,30"></path>
+        <path d="M350,45 Q370,22 390,40 Q410,58 430,35 Q450,12 470,42"></path>
+        <path d="M390,40 Q400,28 410,40"></path>
+        <path d="M430,35 Q440,22 450,35"></path>
+        <path d="M600,42 Q620,20 640,38 Q660,56 680,32 Q700,10 720,40"></path>
+        <path d="M640,38 Q650,26 660,38"></path>
+        <path d="M680,32 Q690,20 700,32"></path>
+        <circle cx="300" cy="44" r="3"></circle>
+        <circle cx="310" cy="38" r="2"></circle>
+        <circle cx="320" cy="46" r="2.5"></circle>
+        <circle cx="550" cy="40" r="3"></circle>
+        <circle cx="560" cy="34" r="2"></circle>
+        <circle cx="570" cy="42" r="2.5"></circle>
+        <circle cx="850" cy="42" r="3"></circle>
+        <circle cx="860" cy="36" r="2"></circle>
+        <circle cx="870" cy="44" r="2.5"></circle>
+        <path d="M900,45 Q920,22 940,40 Q960,58 980,34 Q1000,12 1020,42"></path>
+        <path d="M940,40 Q950,28 960,40"></path>
+        <path d="M980,34 Q990,22 1000,34"></path>
+        <circle cx="1100" cy="40" r="3"></circle>
+        <circle cx="1110" cy="34" r="2"></circle>
+        <circle cx="1120" cy="42" r="2.5"></circle>
+      </g>
+      <!-- Fade to warm white -->
+      <defs>
+        <linearGradient id="aboutDividerFade" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#FBF8F4" stop-opacity="0"></stop>
+          <stop offset="60%" stop-color="#FBF8F4" stop-opacity="0.6"></stop>
+          <stop offset="100%" stop-color="#FBF8F4" stop-opacity="1"></stop>
+        </linearGradient>
+      </defs>
+      <rect x="0" y="0" width="1200" height="90" fill="url(#aboutDividerFade)"></rect>
+    </svg>
+  </div>
+
+</section>
+
+<section id="process" class="index-process-section" data-layout-spec="בית-process" dir="rtl">
+  <div class="index-process-container">
+
+    <!-- Intro Block -->
+    <div class="index-process-intro">
+      <span class="index-process-eyebrow">הדרך אל הבריאות</span>
+      <h2 class="index-process-title">כך נבנה יחד את מסלול הטיפול שלך</h2>
+      <p class="index-process-subtitle">תהליך מחושב, אישי ומעמיק — שמלווה אותך מהפגישה הראשונה ועד לאיזון אמיתי ומתמשך</p>
+    </div>
+
+    <!-- Steps Ribbon -->
+    <div class="index-process-ribbon" role="list">
+
+      <!-- Connector Line -->
+      <div class="index-process-connector" aria-hidden="true"></div>
+
+      <!-- Step 1 -->
+      <article class="index-process-card" role="listitem">
+        <div class="index-process-node" aria-hidden="true"></div>
+        <div class="index-process-step-number">01</div>
+        <div class="index-process-card-icon" aria-hidden="true">
+          <svg data-element-type="icon" data-icon-type="svg" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" width="40" height="40">
+            <circle cx="24" cy="16" r="8"></circle>
+            <path d="M8 40c0-8.837 7.163-16 16-16s16 7.163 16 16"></path>
+            <path d="M30 22l4 4-4 4"></path>
+          </svg>
+        </div>
+        <div class="index-process-card-body">
+          <h3 class="index-process-card-title">שיחת היכרות מעמיקה</h3>
+          <p class="index-process-card-text">מפגש ראשוני ממוקד שבו נקשיב לסיפור שלך — ההיסטוריה הבריאותית, מחזור החיים, האתגרים הרגשיים והגופניים. כאן מתחיל הטיפול האמיתי.</p>
+        </div>
+      </article>
+
+      <!-- Step 2 -->
+      <article class="index-process-card" role="listitem">
+        <div class="index-process-node" aria-hidden="true"></div>
+        <div class="index-process-step-number">02</div>
+        <div class="index-process-card-icon" aria-hidden="true">
+          <svg data-element-type="icon" data-icon-type="svg" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" width="40" height="40">
+            <rect x="8" y="10" width="32" height="28" rx="3"></rect>
+            <path d="M16 10V6M32 10V6"></path>
+            <path d="M8 20h32"></path>
+            <path d="M16 30h4M26 30h6M16 24h16"></path>
+          </svg>
+        </div>
+        <div class="index-process-card-body">
+          <h3 class="index-process-card-title">ניתוח בדיקות דם ודפוסים</h3>
+          <p class="index-process-card-text">עיון מעמיק בבדיקות הדם הקיימות ובדפוסים הגופניים, לאיתור חוסרים, חוסר איזון הורמונלי ומגמות שדורשות התייחסות ייחודית.</p>
+        </div>
+      </article>
+
+      <!-- Step 3 -->
+      <article class="index-process-card" role="listitem">
+        <div class="index-process-node" aria-hidden="true"></div>
+        <div class="index-process-step-number">03</div>
+        <div class="index-process-card-icon" aria-hidden="true">
+          <svg data-element-type="icon" data-icon-type="svg" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" width="40" height="40">
+            <path d="M12 36c2-6 6-10 12-12 6 2 10 6 12 12"></path>
+            <circle cx="24" cy="18" r="6"></circle>
+            <path d="M6 42h36"></path>
+            <path d="M20 26v4M28 26v4"></path>
+          </svg>
+        </div>
+        <div class="index-process-card-body">
+          <h3 class="index-process-card-title">פרוטוקול תזונה ותכנית צמחים</h3>
+          <p class="index-process-card-text">בניית תוכנית תזונה מותאמת אישית לצד פרוטוקול צמחי מרפא שנבחרו במיוחד עבורך — לאיזון הורמונלי, חיזוק מערכות הגוף ותמיכה בפוריות.</p>
+        </div>
+      </article>
+
+      <!-- Step 4 -->
+      <article class="index-process-card" role="listitem">
+        <div class="index-process-node" aria-hidden="true"></div>
+        <div class="index-process-step-number">04</div>
+        <div class="index-process-card-icon" aria-hidden="true">
+          <svg data-element-type="icon" data-icon-type="svg" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" width="40" height="40">
+            <path d="M24 8v6M24 34v6M8 24h6M34 24h6"></path>
+            <circle cx="24" cy="24" r="8"></circle>
+            <path d="M14.1 14.1l4.2 4.2M29.7 29.7l4.2 4.2M14.1 33.9l4.2-4.2M29.7 18.3l4.2-4.2"></path>
+          </svg>
+        </div>
+        <div class="index-process-card-body">
+          <h3 class="index-process-card-title">ליווי, כוונון ותמיכה מתמשכת</h3>
+          <p class="index-process-card-text">מעקב שוטף, התאמת התוכנית לפי תגובות הגוף, ושילוב כלים תומכים כמו דמיון מודרך, פרחי באך ורפלקסולוגיה — לצמיחה אמיתית ומתמשכת.</p>
+        </div>
+      </article>
+
+    </div><!-- end ribbon -->
+
+    <!-- Supporting Note Panel -->
+    <div class="index-process-toolkit-panel">
+      <div class="index-process-toolkit-seal" aria-hidden="true">
+        <svg data-no-icon-edit="true" aria-hidden="true" viewbox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" width="80" height="80">
+          <circle cx="40" cy="40" r="36" stroke="#A9B89B" stroke-width="1.2" stroke-dasharray="4 3"></circle>
+          <circle cx="40" cy="40" r="28" stroke="#DDA8B8" stroke-width="0.8"></circle>
+          <path d="M40 20 C44 28 52 30 52 40 C52 50 44 52 40 58 C36 52 28 50 28 40 C28 30 36 28 40 20Z" stroke="#A9B89B" stroke-width="1" fill="rgba(169,184,155,0.1)"></path>
+          <circle cx="40" cy="40" r="4" fill="#DDA8B8" fill-opacity="0.5"></circle>
+        </svg>
+      </div>
+      <div class="index-process-toolkit-content">
+        <h3 class="index-process-toolkit-title">ארגז הכלים הטיפולי</h3>
+        <p class="index-process-toolkit-text">כל תוכנית טיפול בנויה מתוך שילוב עשיר של כלים שנבחרים בקפידה עבורך: <strong>צמחי מרפא</strong>, <strong>תזונה מותאמת אישית</strong>, <strong>פרחי באך</strong>, <strong>ארומתרפיה</strong>, <strong>דמיון מודרך</strong>, <strong>קלפי אורקל לעבודה פנימית</strong>, <strong>רפלקסולוגיה</strong> ו<strong>עיסוי ארומטי</strong> — כשרלוונטי לתהליך שלך. הכל מותאם לך, למחזור חייך ולצרכים הייחודיים שלך.</p>
+      </div>
+    </div>
+
+  </div><!-- end container -->
+
+  <!-- Bottom Wave Divider -->
+  <div class="index-process-divider-wrapper">
+    <svg data-no-icon-edit="true" aria-hidden="true" viewbox="0 0 1200 70" preserveaspectratio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,70 L0,38 Q80,28 160,36 T320,30 Q400,38 480,28 T640,34 Q720,28 800,36 T960,30 Q1040,38 1120,28 T1200,34 L1200,70 Z" fill="#FBF8F4"></path>
+    </svg>
+  </div>
+
+</section>
+
+<section id="testimonials" class="index-testimonials-section" data-layout-spec="בית-testimonials" dir="rtl">
+  <div class="index-testimonials-container">
+
+    <!-- Section Header -->
+    <div class="index-testimonials-header">
+      <h2 class="index-testimonials-title">נשים שמצאו את עצמן מחדש</h2>
+      <p class="index-testimonials-subtitle">כשגוף ונפש נפגשים בטיפול אמיתי — משהו עמוק מתחיל להשתנות. אלו הן כמה מהסיפורים שנשמעים שוב ושוב בחדר הטיפולים.</p>
+    </div>
+
+    <!-- Asymmetric Grid -->
+    <div class="index-testimonials-grid">
+
+      <!-- Large Quote Card (spans 2 rows, start side) -->
+      <article class="index-testimonials-card index-testimonials-card--large">
+        <div class="index-testimonials-quote-mark" aria-hidden="true">“</div>
+        <blockquote class="index-testimonials-quote">
+          <p>הגעתי לנעמית אחרי שנים של מחזורים לא סדירים, עייפות כרונית ותחושה שגופי פועל נגדי. בפגישה הראשונה היא שאלה אותי שאלות שאף רופא לא שאל — על שינה, על מתח, על מה שאני אוכלת, על מה שאני מרגישה. לראשונה הרגשתי שמישהי באמת רואה אותי בשלמות. אחרי שלושה חודשים של תזונה מותאמת אישית וצמחי מרפא, המחזורים שלי הפכו לסדירים, האנרגיה חזרה — ואני חזרתי לעצמי.</p>
+        </blockquote>
+        <footer class="index-testimonials-author">
+          <div class="index-testimonials-author-avatar" aria-hidden="true">
+            <svg data-element-type="icon" data-icon-type="svg" width="32" height="32" viewbox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="16" cy="12" r="6" fill="currentColor" opacity="0.4"></circle>
+              <path d="M4 28c0-6.627 5.373-12 12-12s12 5.373 12 12" stroke="currentColor" stroke-width="1.5" fill="none" opacity="0.3"></path>
+            </svg>
+          </div>
+          <div>
+            <strong class="index-testimonials-name">מיכל ר.</strong>
+            <span class="index-testimonials-context">איזון הורמונלי, גיל 34</span>
+          </div>
+        </footer>
+      </article>
+
+      <!-- Small Quote Card 1 -->
+      <article class="index-testimonials-card index-testimonials-card--small">
+        <div class="index-testimonials-quote-mark index-testimonials-quote-mark--sm" aria-hidden="true">“</div>
+        <blockquote class="index-testimonials-quote">
+          <p>עברתי תהליך עם נעמית בזמן שניסינו להרות. היא ליוותה אותי בסבלנות ובחוכמה, עזרה לי להבין את מחזורי הגוף שלי ונתנה לי כלים אמיתיים. הריון אחד וחצי שנה אחרי תחילת הטיפול — ואני יודעת שהדרך שלנו ביחד הייתה חלק מהנס הזה.</p>
+        </blockquote>
+        <footer class="index-testimonials-author">
+          <div class="index-testimonials-author-avatar" aria-hidden="true">
+            <svg data-element-type="icon" data-icon-type="svg" width="28" height="28" viewbox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="16" cy="12" r="6" fill="currentColor" opacity="0.4"></circle>
+              <path d="M4 28c0-6.627 5.373-12 12-12s12 5.373 12 12" stroke="currentColor" stroke-width="1.5" fill="none" opacity="0.3"></path>
+            </svg>
+          </div>
+          <div>
+            <strong class="index-testimonials-name">שירה כ.</strong>
+            <span class="index-testimonials-context">פוריות טבעית, גיל 31</span>
+          </div>
+        </footer>
+      </article>
+
+      <!-- Small Quote Card 2 -->
+      <article class="index-testimonials-card index-testimonials-card--small index-testimonials-card--blush">
+        <div class="index-testimonials-quote-mark index-testimonials-quote-mark--sm" aria-hidden="true">“</div>
+        <blockquote class="index-testimonials-quote">
+          <p>גיל המעבר הפתיע אותי בעוצמה שלא ציפיתי. נעמית עזרה לי להבין שמה שאני חווה הוא חלק ממעבר — לא תקלה. עם הצמחים, הארומתרפיה וההכוונה שלה, מצאתי שקט שלא ידעתי שאפשר למצוא.</p>
+        </blockquote>
+        <footer class="index-testimonials-author">
+          <div class="index-testimonials-author-avatar" aria-hidden="true">
+            <svg data-element-type="icon" data-icon-type="svg" width="28" height="28" viewbox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="16" cy="12" r="6" fill="currentColor" opacity="0.4"></circle>
+              <path d="M4 28c0-6.627 5.373-12 12-12s12 5.373 12 12" stroke="currentColor" stroke-width="1.5" fill="none" opacity="0.3"></path>
+            </svg>
+          </div>
+          <div>
+            <strong class="index-testimonials-name">רות ד.</strong>
+            <span class="index-testimonials-context">טיפול טבעי בגיל המעבר, גיל 52</span>
+          </div>
+        </footer>
+      </article>
+
+      <!-- Image Tile -->
+      <div class="index-testimonials-image-tile">
+        <img data-placeholder="index-testimonials-image-1" data-context="A serene natural health scene: a wooden tray with fresh herbal tea being poured into a delicate ceramic cup, dried botanical herbs scattered gently beside it, soft warm natural light streaming from a window, muted sage green and warm cream tones, calm and healing atmosphere, naturopathy and holistic womens health" width="420" height="560" src="/assets/site-index-testimonials-image-1.webp" alt="סצנת בריאות טבעית — תה צמחים ועשבי מרפא בסביבה שקטה ומרפאה">
+        <div class="index-testimonials-image-badge">
+          <span>טבע הבריאה</span>
+        </div>
+      </div>
+
+    </div>
+    <!-- End Grid -->
+
+    <!-- Footer Line -->
+    <p class="index-testimonials-footer-line">הליווי שלנו מלווה נשים מגיל הפוריות ועד גיל המעבר — כי כל שלב בחיים ראוי לתשומת לב ולטיפול אמיתי.</p>
+
+  </div>
+
+  <!-- Bottom Divider -->
+  <div class="index-testimonials-divider-wrapper">
+    <svg data-no-icon-edit="true" aria-hidden="true" viewbox="0 0 1440 90" preserveaspectratio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,90 L0,45 Q120,30 240,48 T480,38 Q600,28 720,44 T960,36 Q1080,26 1200,42 T1440,34 L1440,90 Z" fill="#F5EDE4"></path>
+      <path d="M0,90 L0,62 Q180,50 360,66 T720,54 Q900,44 1080,60 T1440,52 L1440,90 Z" fill="#F5EDE4"></path>
+    </svg>
+  </div>
+
+</section>
+
+<section id="stats" class="index-stats-section" data-layout-spec="בית-stats" dir="rtl">
+  <div class="index-stats-container">
+
+    <!-- Intro Block -->
+    <div class="index-stats-intro">
+      <h2 class="index-stats-heading">גישה אישית, מקיפה ובטוחה — בכל שלב במעגל חייך</h2>
+      <p class="index-stats-subtext">כל אישה היא עולם שלם. לכן כל תהליך טיפולי מתחיל בהקשבה עמוקה, ממשיך בניתוח מעמיק ומסתיים בתוכנית מותאמת אישית שנבנית עבורך בלבד.</p>
+    </div>
+
+    <!-- Four Stat Cards -->
+    <div class="index-stats-grid">
+
+      <article class="index-stat-card">
+        <div class="index-stat-anchor">1:1</div>
+        <h3 class="index-stat-title">טיפול אישי לחלוטין</h3>
+        <p class="index-stat-desc">כל פגישה מוקדשת לך בלבד — זמן, תשומת לב ונוכחות מלאה. אין פרוטוקולים גנריים, רק שיחה אמיתית שמניחה את הבסיס לריפוי.</p>
+      </article>
+
+      <article class="index-stat-card">
+        <div class="index-stat-anchor">4</div>
+        <h3 class="index-stat-title">תחומי מיקוד במעגל החיים</h3>
+        <p class="index-stat-desc">פוריות, מחזור חודשי, גיל המעבר ובריאות הורמונלית יומיומית — ארבעה מרחבים שבהם ניתן לנשים ליווי מעמיק ומקצועי.</p>
+      </article>
+
+      <article class="index-stat-card">
+        <div class="index-stat-anchor">360°</div>
+        <h3 class="index-stat-title">ראייה הוליסטית שלמה</h3>
+        <p class="index-stat-desc">גוף, נפש ורוח בשיח אחד. בדיקות דם, תזונה, צמחי מרפא, פרחי באך, ריפלקסולוגיה ודמיון מודרך — כולם ביחד, בשביל תמונה מלאה.</p>
+      </article>
+
+      <article class="index-stat-card">
+        <div class="index-stat-anchor"><svg data-element-type="icon" data-icon-type="svg" xmlns="http://www.w3.org/2000/svg" width="52" height="52" viewbox="0 0 52 52" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M26 6C26 6 14 14 14 26c0 8.837 5.373 12 12 12s12-3.163 12-12C38 14 26 6 26 6z"></path><path d="M26 38v8"></path><path d="M20 44h12"></path><circle cx="26" cy="26" r="4"></circle></svg></div>
+        <h3 class="index-stat-title">תוכנית מותאמת לך בלבד</h3>
+        <p class="index-stat-desc">בסיום כל ייעוץ תקבלי תוכנית טיפול מפורטת הכוללת תזונה מותאמת אישית, המלצות צמחי מרפא ומפת דרכים ברורה לקדימה.</p>
+      </article>
+
+    </div>
+
+    <!-- Trust Chips Row -->
+    <div class="index-trust-chips" role="list">
+      <span class="index-trust-chip" role="listitem"><i class="fa-regular fa-ear" aria-hidden="true"></i> הקשבה קלינית עמוקה</span>
+      <span class="index-trust-chip" role="listitem"><i class="fa-solid fa-leaf" aria-hidden="true"></i> כלים טבעיים ומדויקים</span>
+      <span class="index-trust-chip" role="listitem"><i class="fa-regular fa-heart" aria-hidden="true"></i> טיפול ממוקד אישה</span>
+      <span class="index-trust-chip" role="listitem"><i class="fa-solid fa-rotate" aria-hidden="true"></i> ליווי לאורך כל השלבים</span>
+      <span class="index-trust-chip" role="listitem"><i class="fa-regular fa-file-lines" aria-hidden="true"></i> ניתוח בדיקות מעבדה</span>
+      <span class="index-trust-chip" role="listitem"><i class="fa-solid fa-seedling" aria-hidden="true"></i> צמחי מרפא וארומתרפיה</span>
+    </div>
+
+  </div>
+
+  <!-- Bottom arc divider -->
+  <div class="index-stats-divider-wrapper">
+    <svg data-no-icon-edit="true" aria-hidden="true" viewbox="0 0 1200 72" preserveaspectratio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,72 L0,40 Q300,0 600,20 Q900,40 1200,8 L1200,72 Z" fill="var(--bg-dark)"></path>
+    </svg>
+  </div>
+
+</section>
+
+<section id="contact" class="index-contact-section" data-layout-spec="בית-contact" dir="rtl">
+  <div class="index-contact-outer">
+    <div class="index-contact-panel">
+      <div class="index-contact-grid">
+
+        <!-- START column: reassurance -->
+        <div class="index-contact-info">
+          <h2 class="index-contact-h2">מוכנה לצעד הבא<br>לקראת איזון טבעי?</h2>
+          <p class="index-contact-lead">הפנייה אליי היא אישית, עדינה, ומותאמת בדיוק למקום שבו את נמצאת עכשיו. אין שאלות מיותרות — רק הקשבה אמיתית והדרך הנכונה עבורך.</p>
+
+          <a href="#contact-form" class="index-contact-cta-btn">בואי נדבר</a>
+
+          <ul class="index-contact-reassurance">
+            <li class="index-contact-reassurance-item">
+              <div class="index-contact-icon-wrap">
+                <svg data-element-type="icon" data-icon-type="svg" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+              </div>
+              <div class="index-contact-reassurance-text">
+                <strong>תשומת לב אישית מלאה</strong>
+                <span>כל אישה מקבלת תוכנית טיפול ייחודית, המותאמת לצרכיה, לגופה ולמעגל חייה.</span>
+              </div>
+            </li>
+            <li class="index-contact-reassurance-item">
+              <div class="index-contact-icon-wrap">
+                <svg data-element-type="icon" data-icon-type="svg" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+              </div>
+              <div class="index-contact-reassurance-text">
+                <strong>הקשבה ללא שיפוטיות</strong>
+                <span>כאן המרחב שלך — לשתף, לשאול, ולהיות בדיוק כמו שאת. כל שיחה מתנהלת מתוך כבוד ורגישות.</span>
+              </div>
+            </li>
+            <li class="index-contact-reassurance-item">
+              <div class="index-contact-icon-wrap">
+                <svg data-element-type="icon" data-icon-type="svg" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
+              </div>
+              <div class="index-contact-reassurance-text">
+                <strong>צעדים ברורים קדימה</strong>
+                <span>לאחר הפנייה תקבלי מענה אישי ונקבע יחד את הפגישה הראשונה — פשוט, נעים ובלי לחץ.</span>
+              </div>
+            </li>
+          </ul>
+
+          <div class="index-contact-direct">
+            <a href="mailto:[business_email]" class="index-contact-direct-link">
+              <svg data-element-type="icon" data-icon-type="svg" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+              [business_email]
+            </a>
+            <a href="tel:[business_phone]" class="index-contact-direct-link">
+              <svg data-element-type="icon" data-icon-type="svg" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.29 6.29l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+              [business_phone]
+            </a>
+          </div>
+        </div>
+
+        <!-- END column: contact form -->
+        <div class="index-contact-form-col" id="contact-form">
+          <form class="contact-form index-contact-form" novalidate="">
+            <div class="index-contact-field">
+              <label for="contact-name">שם מלא</label>
+              <input type="text" id="contact-name" name="name" placeholder="השם שלך" autocomplete="name">
+            </div>
+            <div class="index-contact-field">
+              <label for="contact-email">דואר אלקטרוני</label>
+              <input type="email" id="contact-email" name="email" placeholder="כתובת המייל שלך" autocomplete="email">
+            </div>
+            <div class="index-contact-field">
+              <label for="contact-phone">טלפון</label>
+              <input type="tel" id="contact-phone" name="phone" placeholder="מספר הטלפון שלך" autocomplete="tel">
+            </div>
+            <div class="index-contact-field">
+              <label for="contact-message">הודעה</label>
+              <textarea id="contact-message" name="message" rows="5" placeholder="ספרי לי במה אוכל לעזור לך..."></textarea>
+            </div>
+            <button type="submit" class="index-contact-submit-btn">שלחי הודעה</button>
+            <p class="index-contact-privacy">המידע שלך שמור אצלי בסודיות מוחלטת.</p>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+  </main>
+  
+  <footer class="site-footer" dir="rtl">
+  <div class="footer-top">
+    <div class="footer-container">
+      <div class="footer-grid">
+
+        <!-- Company Info -->
+        <div class="footer-col footer-brand">
+          <img src="/assets/business-logo.webp" alt="טבע הבריאה" class="logo">
+          <p class="footer-tagline">ריפוי טבעי, בריאות הוליסטית ורפואה אלטרנטיבית — מתוך אהבה ומקצועיות.</p>
+          <div class="footer-social">
+            <a href="[facebook_handle]" aria-label="Facebook" class="social-link"><i class="fab fa-facebook-f"></i></a>
+            <a href="[instagram_handle]" aria-label="Instagram" class="social-link"><i class="fab fa-instagram"></i></a>
+            <a href="[whatsapp_handle]" aria-label="WhatsApp" class="social-link"><i class="fab fa-whatsapp"></i></a>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="footer-col">
+          <h4 class="footer-heading">ניווט מהיר</h4>
+          <ul class="footer-links">
+            <li><a href="#services">שירותים</a></li>
+            <li><a href="#about">אודות</a></li>
+            <li><a href="#process">תהליך הטיפול</a></li>
+            <li><a href="#testimonials">המלצות</a></li>
+            <li><a href="#stats">נתונים</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact Info -->
+        <div class="footer-col">
+          <h4 class="footer-heading">צרו קשר</h4>
+          <ul class="footer-contact">
+            <li>
+              <span class="contact-icon"><i class="fas fa-envelope"></i></span>
+              <a href="mailto:[business_email]">[business_email]</a>
+            </li>
+            <li>
+              <span class="contact-icon"><i class="fas fa-phone"></i></span>
+              <a href="tel:[business_phone]">[business_phone]</a>
+            </li>
+            <li><a href="/"><span class="contact-icon"><i class="fas fa-map-marker-alt"></i></span>
+              <span>[business_address]</span></a></li>
+          </ul>
+        </div>
+
+        <!-- Botanical Accent / Extra Info -->
+        <div class="footer-col footer-nature">
+          <h4 class="footer-heading">שעות פעילות</h4>
+          <ul class="footer-hours">
+            <li><a href="/"><span>ראשון – חמישי</span><span>09:00 – 19:00</span></a></li>
+            <li><a href="/"><span>שישי</span><span>09:00 – 13:00</span></a></li>
+            <li><a href="/"><span>שבת</span><span>סגור</span></a></li>
+          </ul>
+          <div class="footer-badge">
+            <i class="fas fa-leaf"></i>
+            <span>טיפול טבעי ומוכח</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Bar -->
+  <div class="footer-bottom">
+    <div class="footer-container footer-bottom-inner">
+      <p class="footer-copy">© 2026 טבע הבריאה. כל הזכויות שמורות.</p>
+      <div class="footer-legal">
+        <a href="/privacy">מדיניות פרטיות</a>
+        <span class="legal-sep"></span>
+        <a href="/terms">תנאי שימוש</a>
+        <span class="legal-sep"></span>
+        <a href="/accessibility">נגישות</a>
+        <span class="legal-sep"></span>
+        <a href="https://zappy5.com" target="_blank" class="zappy-attribution">נוצר באמצעות Zappy</a>
+      </div>
+    </div>
+  </div>
+</footer>
+  
+  <a href="https://wa.me/[whatsapp_handle]" class="whatsapp-float" aria-label="WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+  
+  <div data-integration="accessibility:toolbar"></div>
+
+    <script src="/script.js"></script>
+
+    <script id="zappy-mobile-submenu-script">
+    (function() {
+      function initMobileSubmenuToggles() {
+        if (window.innerWidth > 768) {
+          document.querySelectorAll('.mobile-submenu-toggle').forEach(function(btn) { btn.remove(); });
+          document.querySelectorAll('.sub-menu.mobile-expanded').forEach(function(menu) { menu.classList.remove('mobile-expanded'); });
+          return;
+        }
+        var items = document.querySelectorAll('.nav-menu li:has(.sub-menu), nav li:has(.sub-menu), .navbar li:has(.sub-menu), #navMenu li:has(.sub-menu)');
+        items.forEach(function(li) {
+          if (li.querySelector('.mobile-submenu-toggle')) return;
+          var submenu = li.querySelector('.sub-menu');
+          var parentLink = li.querySelector(':scope > a');
+          if (!submenu || !parentLink) return;
+          var toggleBtn = document.createElement('button');
+          toggleBtn.className = 'mobile-submenu-toggle';
+          toggleBtn.setAttribute('aria-label', 'Toggle submenu');
+          toggleBtn.setAttribute('type', 'button');
+          parentLink.insertAdjacentElement('afterend', toggleBtn);
+          toggleBtn.addEventListener('click', function(e) {
+            e.preventDefault(); e.stopPropagation();
+            document.querySelectorAll('.sub-menu.mobile-expanded').forEach(function(menu) {
+              if (menu !== submenu) { menu.classList.remove('mobile-expanded'); var t = menu.parentElement.querySelector('.mobile-submenu-toggle'); if(t) t.classList.remove('expanded'); }
+            });
+            submenu.classList.toggle('mobile-expanded');
+            toggleBtn.classList.toggle('expanded');
+          });
+        });
+      }
+      if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', initMobileSubmenuToggles); }
+      else { initMobileSubmenuToggles(); }
+      var resizeTimer; window.addEventListener('resize', function() { clearTimeout(resizeTimer); resizeTimer = setTimeout(initMobileSubmenuToggles, 250); });
+      // Re-initialize when mobile menu becomes visible (MutationObserver)
+      var observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          if (mutation.type === 'attributes') {
+            var target = mutation.target;
+            if (target.classList && (target.classList.contains('active') || target.classList.contains('open'))) {
+              setTimeout(initMobileSubmenuToggles, 100);
+            }
+          }
+        });
+      });
+      setTimeout(function() {
+        document.querySelectorAll('.mobile-menu, .nav-menu, #navMenu, nav').forEach(function(menu) {
+          observer.observe(menu, { attributes: true, attributeFilter: ['class', 'style'] });
+        });
+      }, 500);
+    })();
+    </script>
+
+    <script id="zappy-navbar-scroll-effect">
+    (function(){
+      var nb=document.querySelector('nav.navbar,.navbar:not(.zappy-catalog-menu)');
+      var cm=document.querySelector('.zappy-catalog-menu,#zappy-catalog-menu');
+      if(!nb)return;
+      var fb='rgba(251,248,244,0.85)';
+      var th=60;
+      var rs=getComputedStyle(document.documentElement);
+      var td=rs.getPropertyValue('--text-dark').trim()||'#1a1a1a';
+      var tl=rs.getPropertyValue('--text-light').trim()||'#ffffff';
+      var st=true?td:tl;
+      nb.style.transition='background 0.3s ease,backdrop-filter 0.3s ease,-webkit-backdrop-filter 0.3s ease,box-shadow 0.3s ease';
+      if(cm)cm.style.transition='background 0.3s ease,backdrop-filter 0.3s ease,-webkit-backdrop-filter 0.3s ease';
+      var neSel='a,.navbar-brand,.navbar-brand a,.dropdown-toggle,.mobile-toggle,.phone-header-btn,.mobile-hamburger-btn,.mobile-close-btn,.mobile-submenu-toggle,.nav-link';
+      var skipCls=['cart-link','login-link','nav-search-toggle','search-toggle'];
+      function sTC(c,clr){var els=c.querySelectorAll(neSel);for(var i=0;i<els.length;i++){var sk=false;if(els[i].closest('.sub-menu')||els[i].closest('.dropdown-menu')){sk=true;}for(var j=0;j<skipCls.length;j++){if(els[i].classList.contains(skipCls[j])){sk=true;break;}}if(!sk)els[i].style.setProperty('color',clr,'important');}}
+      function cTC(c){var els=c.querySelectorAll(neSel);for(var i=0;i<els.length;i++){if(els[i].closest('.sub-menu')||els[i].closest('.dropdown-menu'))continue;els[i].style.removeProperty('color');}}
+      function applyScrolled(){
+        nb.classList.add('scrolled');
+        if(window.innerWidth>768){
+          nb.style.setProperty('--frosted-text',st);
+          nb.style.setProperty('background-image','none','important');
+          nb.style.setProperty('background-color',fb,'important');
+          nb.style.backdropFilter='blur(12px)';nb.style.webkitBackdropFilter='blur(12px)';nb.style.boxShadow='0 2px 16px rgba(0,0,0,0.12)';
+          sTC(nb,st);
+        }
+        if(cm){cm.classList.add('scrolled');if(window.innerWidth>768){cm.style.setProperty('background',fb,'important');cm.style.setProperty('backdrop-filter','blur(12px)','important');cm.style.setProperty('-webkit-backdrop-filter','blur(12px)','important');sTC(cm,st);}}
+      }
+      function onS(){
+        if(window._zappyNavNoDarkHero) return;
+        if(window.innerWidth<=768){nb.classList.remove('scrolled');cTC(nb);if(cm){cm.classList.remove('scrolled');cTC(cm);}return;}
+        var y=window.scrollY||window.pageYOffset;
+        if(y>th){
+          nb.classList.add('scrolled');nb.style.setProperty('background-color',fb,'important');nb.style.setProperty('background-image','none','important');
+          nb.style.setProperty('--frosted-text',st);nb.style.backdropFilter='blur(12px)';nb.style.webkitBackdropFilter='blur(12px)';nb.style.boxShadow='0 2px 16px rgba(0,0,0,0.12)';
+          sTC(nb,st);
+          if(cm){cm.classList.add('scrolled');cm.style.setProperty('background',fb,'important');cm.style.setProperty('backdrop-filter','blur(12px)','important');cm.style.setProperty('-webkit-backdrop-filter','blur(12px)','important');sTC(cm,st);}
+        }else{
+          nb.classList.remove('scrolled');nb.style.setProperty('background-color','transparent','important');nb.style.removeProperty('background-image');
+          nb.style.removeProperty('--frosted-text');nb.style.backdropFilter='none';nb.style.webkitBackdropFilter='none';nb.style.boxShadow='none';
+          cTC(nb);
+          if(cm){cm.classList.remove('scrolled');cm.style.setProperty('background','transparent','important');cm.style.setProperty('backdrop-filter','none','important');cm.style.setProperty('-webkit-backdrop-filter','none','important');cTC(cm);}
+        }
+      }
+      function sLum(rv,gv,bv){rv/=255;gv/=255;bv/=255;rv=rv<=0.03928?rv/12.92:Math.pow((rv+0.055)/1.055,2.4);gv=gv<=0.03928?gv/12.92:Math.pow((gv+0.055)/1.055,2.4);bv=bv<=0.03928?bv/12.92:Math.pow((bv+0.055)/1.055,2.4);return 0.2126*rv+0.7152*gv+0.0722*bv;}
+      window.addEventListener('scroll',onS,{passive:true});
+      window.addEventListener('resize',onS,{passive:true});
+      onS();
+      var heroEl=document.querySelector('section[class*="hero"],[data-hero-type],main>section:first-child');
+      var hasDH=false;
+      if(heroEl){var hCs=getComputedStyle(heroEl);var hBI=hCs.backgroundImage;if(hBI&&hBI!=='none'){if(hBI.indexOf('url(')!==-1){var hM2=hCs.backgroundColor.match(/\d+/g);if(hM2&&hM2.length>=3){hasDH=sLum(parseInt(hM2[0]),parseInt(hM2[1]),parseInt(hM2[2]))<0.4;}else{hasDH=true;}}else if(hBI.indexOf('gradient')!==-1){var cM=hBI.match(/rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/g);if(cM&&cM.length>0){var tLm=0;for(var ci=0;ci<cM.length;ci++){var pts=cM[ci].match(/\d+/g);tLm+=sLum(parseInt(pts[0]),parseInt(pts[1]),parseInt(pts[2]));}hasDH=(tLm/cM.length)<0.4;}else{hasDH=true;}}else{hasDH=true;}}else{var hM=hCs.backgroundColor.match(/\d+/g);if(hM&&hM.length>=3){hasDH=sLum(parseInt(hM[0]),parseInt(hM[1]),parseInt(hM[2]))<0.4;}}}
+      if(!hasDH){window.removeEventListener('scroll',onS);window.removeEventListener('resize',onS);applyScrolled();window._zappyNavNoDarkHero=true;}
+    })();
+    </script>
+
+    <script id="zappy-mobile-lang-menu-script">
+    (function() {
+      function initMobileLangMenu() {
+        if (window.innerWidth > 768) {
+          var existingMenu = document.querySelector('.mobile-lang-menu');
+          if (existingMenu) existingMenu.remove();
+          return;
+        }
+        if (document.querySelector('.mobile-lang-menu')) return;
+        var switcher = document.querySelector('.lang-switcher');
+        if (!switcher) return;
+        var dropdown = switcher.querySelector('.lang-switcher-dropdown');
+        if (!dropdown) return;
+        var options = dropdown.querySelectorAll('.lang-option');
+        if (options.length === 0) return;
+        var navMenu = document.getElementById('navMenu') || document.querySelector('.nav-menu') || document.querySelector('nav ul');
+        if (!navMenu) return;
+        var currentLang = document.documentElement.lang || 'en';
+        var langConfigs = {
+          he: {name:'עברית',flag:'https://api.iconify.design/circle-flags/il.svg'},
+          en: {name:'English',flag:'https://api.iconify.design/circle-flags/us.svg'},
+          ar: {name:'العربية',flag:'https://api.iconify.design/circle-flags/sa.svg'},
+          fr: {name:'Français',flag:'https://api.iconify.design/circle-flags/fr.svg'},
+          es: {name:'Español',flag:'https://api.iconify.design/circle-flags/es.svg'},
+          de: {name:'Deutsch',flag:'https://api.iconify.design/circle-flags/de.svg'},
+          ru: {name:'Русский',flag:'https://api.iconify.design/circle-flags/ru.svg'},
+          zh: {name:'中文',flag:'https://api.iconify.design/circle-flags/cn.svg'},
+          ja: {name:'日本語',flag:'https://api.iconify.design/circle-flags/jp.svg'},
+          pt: {name:'Português',flag:'https://api.iconify.design/circle-flags/br.svg'},
+          it: {name:'Italiano',flag:'https://api.iconify.design/circle-flags/it.svg'},
+          ko: {name:'한국어',flag:'https://api.iconify.design/circle-flags/kr.svg'}
+        };
+        var container = document.createElement('div');
+        container.className = 'mobile-lang-menu';
+        var currentConfig = langConfigs[currentLang] || {name:currentLang,flag:''};
+        var toggleBtn = document.createElement('button');
+        toggleBtn.className = 'mobile-lang-toggle';
+        toggleBtn.type = 'button';
+        var currentFlagHtml = currentConfig.flag ? '<img src="' + currentConfig.flag + '" width="20" height="20" alt="" style="border-radius:50%;margin-right:8px;margin-left:8px;">' : '';
+        toggleBtn.innerHTML = currentFlagHtml + currentConfig.name;
+        container.appendChild(toggleBtn);
+        var optionsDiv = document.createElement('div');
+        optionsDiv.className = 'mobile-lang-options';
+        var currentLink = document.createElement('a');
+        currentLink.className = 'mobile-lang-option active';
+        currentLink.href = '#';
+        currentLink.innerHTML = currentFlagHtml + currentConfig.name;
+        optionsDiv.appendChild(currentLink);
+        options.forEach(function(opt) {
+          var link = document.createElement('a');
+          link.className = 'mobile-lang-option';
+          link.href = opt.getAttribute('href');
+          link.innerHTML = opt.innerHTML;
+          optionsDiv.appendChild(link);
+        });
+        container.appendChild(optionsDiv);
+        navMenu.appendChild(container);
+        toggleBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          toggleBtn.classList.toggle('expanded');
+          optionsDiv.classList.toggle('expanded');
+        });
+      }
+      if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', initMobileLangMenu); }
+      else { initMobileLangMenu(); }
+      window.addEventListener('resize', function() { clearTimeout(window._mlrt); window._mlrt = setTimeout(initMobileLangMenu, 250); });
+    })();
+    </script>
+</body>
+</html>

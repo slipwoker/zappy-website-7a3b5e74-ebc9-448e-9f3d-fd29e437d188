@@ -258,8 +258,8 @@
       .sub-menu a:hover { background-color: #f5f5f5; }
       /* RTL (Hebrew/Arabic) dropdown positioning */
       [dir="rtl"] .nav-menu .sub-menu, [dir="rtl"] nav .sub-menu, [dir="rtl"] .navbar .sub-menu, html[lang="he"] .nav-menu .sub-menu, html[lang="he"] nav .sub-menu, html[lang="he"] .navbar .sub-menu, html[lang="ar"] .nav-menu .sub-menu, html[lang="ar"] nav .sub-menu, html[lang="ar"] .navbar .sub-menu { left: auto !important; right: 0 !important; }
-      /* Hide empty dropdown menus */
-      .sub-menu:empty, .sub-menu:not(:has(li:not(.zappy-hidden-menu-item))), .sub-menu:not(:has(li)) { display: none !important; opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; }
+      /* Hide empty dropdown menus (exclude catalog sub-menus that use <a> children instead of <li>) */
+      .sub-menu:empty, .sub-menu:not(:has(li:not(.zappy-hidden-menu-item))):not(:has(> a)), .sub-menu:not(:has(li)):not(:has(> a)) { display: none !important; opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; }
       /* Desktop: show submenu on Menu Group hover */
       li:has(.menu-group-title):hover > .sub-menu { opacity: 1 !important; visibility: visible !important; transform: translateY(0) !important; pointer-events: auto !important; }
       /* Menu Group title styling */
@@ -268,7 +268,7 @@
       /* ========== MOBILE SUBMENU STYLES ========== */
       @media (max-width: 768px) {
         .nav-menu .sub-menu, nav .sub-menu, .navbar .sub-menu, #navMenu .sub-menu { position: static !important; transform: none !important; box-shadow: none !important; background: transparent !important; max-height: 0; overflow: hidden; opacity: 0; visibility: hidden; transition: max-height 0.3s ease, opacity 0.3s ease; padding: 0 !important; border-radius: 0 !important; }
-        .sub-menu.mobile-expanded { max-height: 500px !important; opacity: 1 !important; visibility: visible !important; padding: 8px 0 8px 16px !important; }
+        .sub-menu.mobile-expanded { max-height: 60vh !important; overflow-y: auto !important; opacity: 1 !important; visibility: visible !important; padding: 8px 0 8px 16px !important; }
         [dir="rtl"] .sub-menu.mobile-expanded, html[lang="he"] .sub-menu.mobile-expanded { padding: 8px 16px 8px 0 !important; }
         /* Disable hover behavior on mobile */
         .nav-menu li:hover > .sub-menu, nav li:hover > .sub-menu, .navbar li:hover > .sub-menu, #navMenu li:hover > .sub-menu { opacity: 0; visibility: hidden; pointer-events: none; }
@@ -964,7 +964,7 @@
         </div>
       </div>
 
-      <!-- Imagery Column (END = LEFT in RTL) -->
+      <!-- Imagery Column (END = Left in RTL) -->
       <div class="index-about-imagery">
         <div class="index-about-main-image-wrap">
           <div data-zappy-zoom-wrapper="true" data-element-id="img-1774948946982-r0alz2v5x" data-element-type="image" data-zappy-zoom-wrapper-width="498px" data-zappy-zoom-wrapper-height="664px" data-zappy-zoom-wrapper-width-mode="px" data-zappy-zoom-clip="true" data-zappy-wrapper-margins-applied="true" style="position: relative !important; overflow: hidden !important; width: 498px !important; max-width: 100% !important; margin-left: auto !important; margin-right: auto !important; height: 664px !important; display: block !important;"><img data-placeholder="index-about-image-1" data-context="A warm, intimate portrait of a female naturopath and herbalist in a bright consultation room. She is sitting at a wooden desk surrounded by glass jars of dried herbs, a cup of herbal tea, and botanical reference books. Soft natural light filters through sheer curtains. The mood is calm, professional, and deeply feminine. Warm cream and sage green tones throughout. She appears approachable and knowledgeable." src="/assets/site-index-service-image-1-1774950205930-lsshox.webp?v=1774950208018" width="480" height="620" alt="נעמית דגן, נטורופתית קלינית — ייעוץ אישי בטבע הבריאה" class="index-about-main-img" data-element-type="image" data-element-id="img-1774948946982-r0alz2v5x" style="position: absolute !important; object-position: 36% 44%; margin: 0px !important; left: -49.906% !important; top: 0% !important; width: 238.628% !important; height: 100% !important; max-width: none !important; max-height: none !important; display: block; object-fit: cover !important;" data-zappy-zoom="1" data-zappy-original-width="498" data-zappy-original-height="664"></div>
@@ -1150,7 +1150,7 @@
 
       <!-- Large Quote Card (spans 2 rows, start side) -->
       <article class="index-testimonials-card index-testimonials-card--large" id="zappy-section-15">
-        <div class="index-testimonials-quote-mark" aria-hidden="true">“</div>
+        <div class="index-testimonials-quote-mark" aria-hidden="true">"</div>
         <blockquote class="index-testimonials-quote">
           <p>הגעתי לנעמית אחרי שנים של מחזורים לא סדירים, עייפות כרונית ותחושה שגופי פועל נגדי. בפגישה הראשונה היא שאלה אותי שאלות שאף רופא לא שאל — על שינה, על מתח, על מה שאני אוכלת, על מה שאני מרגישה. לראשונה הרגשתי שמישהי באמת רואה אותי בשלמות. אחרי שלושה חודשים של תזונה מותאמת אישית וצמחי מרפא, המחזורים שלי הפכו לסדירים, האנרגיה חזרה — ואני חזרתי לעצמי.</p>
         </blockquote>
@@ -1170,7 +1170,7 @@
 
       <!-- Small Quote Card 1 -->
       <article class="index-testimonials-card index-testimonials-card--small" id="zappy-section-16">
-        <div class="index-testimonials-quote-mark index-testimonials-quote-mark--sm" aria-hidden="true">“</div>
+        <div class="index-testimonials-quote-mark index-testimonials-quote-mark--sm" aria-hidden="true">"</div>
         <blockquote class="index-testimonials-quote">
           <p >עברתי תהליך עם נעמית בזמן שניסינו להרות. היא ליוותה אותי ברגישות ובחוכמה,עזרה לי להפחית מתח,לשחרר מכאובי העבר,להבין את מחזורי הגוף שלי ולהתחבר אליו. לאחר חודשיים רירית הרחם שלי התעבתה מ6.5 ל-8!! בהמשך ירדתי קצת במשקל ולאחר כ-4 חודשים מתחילת הטיפול נקלטתי! אני יודעת שהדרך שלנו ביחד הייתה חלק מהנס הזה.</p>
         </blockquote>
@@ -1190,7 +1190,7 @@
 
       <!-- Small Quote Card 2 -->
       <article class="index-testimonials-card index-testimonials-card--small index-testimonials-card--blush" id="zappy-section-17">
-        <div class="index-testimonials-quote-mark index-testimonials-quote-mark--sm" aria-hidden="true">“</div>
+        <div class="index-testimonials-quote-mark index-testimonials-quote-mark--sm" aria-hidden="true">"</div>
         <blockquote class="index-testimonials-quote">
           <p>גיל המעבר הפתיע אותי בעוצמה שלא ציפיתי. נעמית עזרה לי להבין שמה שאני חווה הוא חלק ממעבר — לא תקלה. עם הצמחים, הארומתרפיה וההכוונה שלה, מצאתי שקט שלא ידעתי שאפשר למצוא.</p>
         </blockquote>
@@ -1434,13 +1434,17 @@
         <div class="footer-col footer-nature">
           <h4 class="footer-heading">שעות פעילות</h4>
           <ul class="footer-hours">
-            <li><a href="/"><span>ראשון – חמישי</span><span>09:00 – 19:00</span></a></li>
-            <li><a href="/"><span>שישי</span><span>09:00 – 13:00</span></a></li>
-            <li><a href="/"><span>שבת</span><span>סגור</span></a></li>
+            <li><a href="/"><span style="color: #FBF8F4">יום ראשון</span>&nbsp;<span style="color: #FBF8F4">10:00 – 19:00</span></a></li>
+            <li><a href="/"><span style="color: #FBF8F4">יום שני</span>&nbsp;<span style="color: #FBF8F4">10:00 – 19:00</span></a></li>
+            <li><a href="/"><span style="color: #FBF8F4">יום שלישי</span>&nbsp;<span style="color: #FBF8F4">10:00 – 19:00</span></a></li>
+            <li><a href="/"><span style="color: #FBF8F4">יום רביעי</span>&nbsp;<span style="color: #FBF8F4">10:00 – 19:00</span></a></li>
+            <li><a href="/"><span style="color: #FBF8F4">יום חמישי</span>&nbsp;<span style="color: #FBF8F4">10:00 – 19:00</span></a></li>
+            <li><a href="/"><span style="color: #FBF8F4">יום שישי</span>&nbsp;<span style="color: #FBF8F4">10:00 – 13:00</span></a></li>
+            <li><a href="/"><span style="color: #FBF8F4">יום שבת</span>&nbsp;<span style="color: #FBF8F4">סגור</span></a></li>
           </ul>
           <div class="footer-badge">
             <i class="fas fa-leaf"></i>
-            <span>טיפול טבעי ומוכח</span>
+            <span style="color: #FBF8F4">טיפול טבעי ומוכח</span>
           </div>
         </div>
 

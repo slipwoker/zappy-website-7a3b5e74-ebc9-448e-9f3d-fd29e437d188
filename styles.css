@@ -5328,6 +5328,20 @@ body.accessibility-widget-visible ._access-menu {
   opacity: 0.75;
 }
 
+/* ========== EMPTY SUBMENU HIDING (Auto-added by Zappy) ========== */
+.sub-menu:empty,
+.dropdown-menu:empty,
+.sub-menu.zappy-empty-submenu,
+.dropdown-menu.zappy-empty-submenu,
+.nav-menu .sub-menu.zappy-empty-submenu,
+nav .sub-menu.zappy-empty-submenu,
+.navbar .sub-menu.zappy-empty-submenu,
+#navMenu .sub-menu.zappy-empty-submenu,
+#navMenu .dropdown-menu.zappy-empty-submenu {
+  display: none !important;
+}
+
+
 /* ========== RTL MOBILE NAVBAR FIX (zappy-rtl-mobile-fix) ========== */
 /* High-specificity rules to ensure RTL positioning wins over any [lang="en"] conflicts */
 /* For RTL sites: hamburger on RIGHT, phone on LEFT (mirror of LTR layout) */
@@ -5933,6 +5947,12 @@ section[data-hero-type] {
 
 /* Footer contact alignment fix */
 .footer-contact li > a { display: flex; align-items: flex-start; gap: inherit; }
+
+
+/* ZAPPY_NAVBAR_CTA_ALIGNMENT_FIX */
+.nav-cta-container .zappy-search-container,
+.zappy-search-container { align-self: center; }
+.nav-cta-container p { margin: 0 !important; }
 
 
 /* ZAPPY_SECTION_BG_TYPE_FIX */

@@ -1,35 +1,59 @@
-# Business — Generative Engine Optimization Map
+# טבע הבריאה — Generative Engine Optimization Map
+
+> Naamit Dagan is a clinical naturopath and herbalist specializing in women's health across all life cycles, operating under the brand 'Teva HaBria' (Nature of Creation). Her philosophy centers on the belief that true health is the ultimate empowerment — when a woman is healthy and vital, she blossoms from within. She takes a holistic mind-body approach, treating conditions such as hormonal imbalances, irregular menstruation, subfertility, PCOS, and menopause using a rich toolkit including deep intake consultations, blood test analysis, personalized nutrition, herbal medicine, Bach flowers, aromatherapy, guided imagery, oracle cards, reflexology, and aromatic massage. Each client receives a fully personalized treatment plan, reflecting a deeply feminine, nature-inspired, and empowering brand identity.
 
 ---
 
 ## Pages
 
 ### בית
-https://example.com
+https://tev-habria.zappy5.app
 Naamit Dagan is a clinical naturopath and herbalist specializing in women&#39;s health across all life cycles, operating under the brand &#39;Teva HaBria&#39; (Nature of Cr
 
 ## Legal & Policy
 
 ### Privacy Policy
-https://example.com/privacy
+https://tev-habria.zappy5.app/privacy
 Information about how user data is collected, stored, and protected.
 
 ### Terms & Conditions
-https://example.com/terms
+https://tev-habria.zappy5.app/terms
 Legal terms describing service usage, rights, and policies.
 
 ### Accessibility Statement
-https://example.com/accessibility
+https://tev-habria.zappy5.app/accessibility
 Information about WCAG compliance and accessibility features.
 
 ---
 
 # Business Context (for LLM understanding)
 
-## About Business
+## About טבע הבריאה
+Naamit Dagan is a clinical naturopath and herbalist specializing in women's health across all life cycles, operating under the brand 'Teva HaBria' (Nature of Creation). Her philosophy centers on the belief that true health is the ultimate empowerment — when a woman is healthy and vital, she blossoms from within. She takes a holistic mind-body approach, treating conditions such as hormonal imbalances, irregular menstruation, subfertility, PCOS, and menopause using a rich toolkit including deep intake consultations, blood test analysis, personalized nutrition, herbal medicine, Bach flowers, aromatherapy, guided imagery, oracle cards, reflexology, and aromatic massage. Each client receives a fully personalized treatment plan, reflecting a deeply feminine, nature-inspired, and empowering brand identity.
+
+## Services/Products
+- איזון הורמונאלי
+- טיפול בבעיות וסת
+- תת פוריות (נשים וזוגות)
+- גיל המעבר
+- בעיות במערכת הרבייה והעיכול
+- תזונה מותאמת אישית
+- צמחי מרפא
+- פרחי באך
+- ארומתרפיה
+- דימיון מודרך
+- רפלקסולוגיה
+- עיסוי ארומתרפי
+
+## Target Audience
+נשים במעגלי החיים - מגיל הפוריות עד גיל המעבר
+
+## Industry
+בריאות טבעית ורפואה אלטרנטיבית
+
 ---
 
 # Additional Resources
 
-- **Sitemap**: https://example.com/sitemap.xml
-- **Robots.txt**: https://example.com/robots.txt
+- **Sitemap**: https://tev-habria.zappy5.app/sitemap.xml
+- **Robots.txt**: https://tev-habria.zappy5.app/robots.txt

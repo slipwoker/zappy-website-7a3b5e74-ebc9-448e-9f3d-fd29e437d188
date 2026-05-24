@@ -7,22 +7,43 @@
 ## Pages
 
 ### בית
-https://tev-habria.zappy5.app
+https://teva-habria.co.il
 Naamit Dagan is a clinical naturopath and herbalist specializing in women&#39;s health across all life cycles, operating under the brand &#39;Teva HaBria&#39; (Nature of Cr
 
 ## Legal & Policy
 
 ### Privacy Policy
-https://tev-habria.zappy5.app/privacy
+https://teva-habria.co.il/privacy
 Information about how user data is collected, stored, and protected.
 
 ### Terms & Conditions
-https://tev-habria.zappy5.app/terms
+https://teva-habria.co.il/terms
 Legal terms describing service usage, rights, and policies.
 
 ### Accessibility Statement
-https://tev-habria.zappy5.app/accessibility
+https://teva-habria.co.il/accessibility
 Information about WCAG compliance and accessibility features.
+
+---
+
+## How to Contact Us
+
+- Email: naamitdagan@gmail.com
+- Phone: 0522848831
+- Phone (tel): tel:0522848831
+- Address: פרדס חנה-כרכור, Israel
+
+### Contact form
+- URL: https://teva-habria.co.il
+- Endpoint: https://teva-habria.co.il/api/email/contact-form
+- Method: POST
+- Content-Type: application/json
+- Fields:
+  - `name` (text)
+  - `email` (email)
+  - `phone` (tel)
+  - `message` (textarea)
+  - `privacy_consent` (checkbox, required)
 
 ---
 
@@ -53,7 +74,8 @@ Naamit Dagan is a clinical naturopath and herbalist specializing in women's heal
 
 ---
 
-# Additional Resources
+# Machine-readable feeds
 
-- **Sitemap**: https://tev-habria.zappy5.app/sitemap.xml
-- **Robots.txt**: https://tev-habria.zappy5.app/robots.txt
+- Sitemap (XML): https://teva-habria.co.il/sitemap.xml
+- Robots: https://teva-habria.co.il/robots.txt
+- Flattened page text (for LLMs): https://teva-habria.co.il/llms-full.txt

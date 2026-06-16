@@ -161,26 +161,31 @@
       // Track button clicks (counted as actions)
       if (target.tagName === 'BUTTON' || target.closest('button')) {
         var button = target.tagName === 'BUTTON' ? target : target.closest('button');
-        trackEvent('click', {
+        var clickMeta = {
           element: 'button',
           text: button.textContent.trim().substring(0, 100),
           id: button.id || null,
           class: button.className || null
-        });
+        };
+        
+        trackEvent('click', clickMeta);
       }
       
       // Track link clicks (navigation - not counted as actions)
       else if (target.tagName === 'A' || target.closest('a')) {
         var link = target.tagName === 'A' ? target : target.closest('a');
-        trackEvent('navigation', {
+        var navMeta = {
           element: 'link',
           text: link.textContent.trim().substring(0, 100),
           href: link.href,
           external: link.hostname !== window.location.hostname
-        });
+        };
+        
+        trackEvent('navigation', navMeta);
       }
     }, true);
   }
+  
   
   // Track form submissions
   if (config.trackFormSubmissions) {
@@ -1089,13 +1094,13 @@
 
     <!-- Intro Block -->
     <div class="index-process-intro">
-      <p class="zappy-editable"><span class="index-process-eyebrow" style="color: rgb(47, 42, 40) !important;">הדרך אל הבריאות</span>
+      <p><span class="index-process-eyebrow" style="color: rgb(47, 42, 40) !important;">הדרך אל הבריאות</span>
       </p><h2 class="index-process-title">כך נבנה יחד את מסלול הטיפול שלך</h2>
       <p class="index-process-subtitle" style="color: rgb(47, 42, 40) !important;">תהליך מחושב, אישי ומעמיק — שמלווה אותך מהפגישה הראשונה ועד לאיזון אמיתי ומתמשך</p>
     </div>
 
     <!-- Steps Ribbon -->
-    <div class="index-process-ribbon zappy-preserve-css-grid" role="list" id="zappy-auto-grid-1779632323766-19ifd5" data-zappy-auto-grid="true" data-original-item-width="854" data-original-gap="0px" style="--zappy-grid-cols: 289.988px 290px 290px 290px; grid-template-columns: 289.988px 290px 290px 290px; display: grid; align-items: stretch !important;" data-zappy-explicit-columns="true">
+    <div class="index-process-ribbon zappy-preserve-css-grid" role="list" id="zappy-auto-grid-1779632323766-19ifd5" data-zappy-auto-grid="true" data-original-item-width="854" data-original-gap="0px" style="--zappy-grid-cols: repeat(4, minmax(0, 1fr)); grid-template-columns: repeat(4, minmax(0, 1fr)); display: grid; align-items: stretch !important;" data-zappy-explicit-columns="true">
 
       <!-- Connector Line -->
       <div class="index-process-connector" aria-hidden="true"></div>
@@ -1165,7 +1170,7 @@
           </svg>
         </div>
         <div class="index-process-card-body">
-          <h3 class="index-process-card-title">ליווי, כוונון ותמיכה מתמשכת</h3>
+          <h3 class="index-process-card-title" style="">ליווי, הכוונה ותמיכה מתמשכת</h3>
           <p class="index-process-card-text" style="">מעקב שוטף, התאמת התוכנית לפי תגובות הגוף, ושילוב כלים תומכים כמו דמיון מודרך, פרחי באך רפלקסולוגיה ועוד— לצמיחה אמיתית ומתמשכת.</p>
         </div>
       </article>

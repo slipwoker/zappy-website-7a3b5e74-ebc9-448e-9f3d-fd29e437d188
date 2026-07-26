@@ -1842,16 +1842,16 @@ body:has(.zappy-announcement-bar) main > section[class*="hero"]:first-of-type {
 <section id="contact" class="index-contact-section" data-layout-spec="בית-contact" dir="rtl">
   <div class="index-contact-outer">
     <div class="index-contact-panel">
-      <div class="index-contact-grid">
+      <div class="index-contact-grid zappy-preserve-css-grid" data-zappy-grid-align="start" data-original-item-width="390" data-original-gap="56px" style="--zappy-grid-cols: repeat(auto-fit, minmax(min(100%, 390px), 1fr)); grid-template-columns: repeat(auto-fit, minmax(min(100%, 390px), 1fr)); display: grid; align-items: stretch !important;" data-zappy-explicit-columns="true">
 
         <!-- START column: reassurance -->
-        <div class="index-contact-info">
-          <h2 class="index-contact-h2">מוכנה לצעד הבא<br>לקראת איזון טבעי?</h2>
+        <div class="index-contact-info" data-grid-item-index="0">
+          <h2 class="index-contact-h2" style="">מוכנה לצעד הבא<br>למען בריאותך?</h2>
           <p class="index-contact-lead">הפנייה אליי היא אישית, עדינה, ומותאמת בדיוק למקום שבו את נמצאת עכשיו. אין שאלות מיותרות — רק הקשבה אמיתית והדרך הנכונה עבורך.</p>
 
-          <a href="#contact-form" class="index-contact-cta-btn">בואי נדבר</a>
+          <p><a href="#contact-form" class="index-contact-cta-btn" style="color: rgb(47, 42, 40) !important;" data-element-type="button" data-element-id="btn-1785065510751-qwa4siqs9" data-native-element="true">בואי נדבר</a>
 
-          <ul class="index-contact-reassurance">
+          </p><ul class="index-contact-reassurance">
             <li class="index-contact-reassurance-item">
               <div class="index-contact-icon-wrap">
                 <svg data-element-type="icon" data-icon-type="svg" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
@@ -1894,19 +1894,19 @@ body:has(.zappy-announcement-bar) main > section[class*="hero"]:first-of-type {
         </div>
 
         <!-- END column: contact form -->
-        <div class="index-contact-form-col" id="contact-form">
+        <div class="index-contact-form-col" id="contact-form" data-grid-item-index="1">
           <form class="contact-form index-contact-form" novalidate="">
             <div class="index-contact-field">
               <label for="contact-name">שם מלא</label>
-              <input type="text" id="contact-name" name="name" placeholder="השם שלך" autocomplete="name">
+              <input type="text" id="contact-name" name="name" placeholder="השם שלך" autocomplete="name" fdprocessedid="d7yjj">
             </div>
             <div class="index-contact-field">
               <label for="contact-email">דואר אלקטרוני</label>
-              <input type="email" id="contact-email" name="email" placeholder="כתובת המייל שלך" autocomplete="email">
+              <input type="email" id="contact-email" name="email" placeholder="כתובת המייל שלך" autocomplete="email" fdprocessedid="ps3dhi">
             </div>
             <div class="index-contact-field">
               <label for="contact-phone">טלפון</label>
-              <input type="tel" id="contact-phone" name="phone" placeholder="מספר הטלפון שלך" autocomplete="tel">
+              <input type="tel" id="contact-phone" name="phone" placeholder="מספר הטלפון שלך" autocomplete="tel" fdprocessedid="5vufco">
             </div>
             <div class="index-contact-field">
               <label for="contact-message">הודעה</label>
@@ -1920,7 +1920,7 @@ body:has(.zappy-announcement-bar) main > section[class*="hero"]:first-of-type {
   </label>
 </div>
 <script data-privacy-consent-validation="">(function(){if(window._zpcv)return;window._zpcv=1;var _l=document.documentElement.lang||"";var isHe=_l==="he"||(_l!=="ar"&&document.documentElement.dir==="rtl");var isAr=_l==="ar";var valMsg=isHe?"יש לאשר את תנאי השימוש ומדיניות הפרטיות":isAr?"يرجى الموافقة على الشروط والأحكام وسياسة الخصوصية":"Please accept the Terms & Conditions and Privacy Policy";var cbs=document.querySelectorAll(".privacy-consent-checkbox");cbs.forEach(function(cb){cb.setCustomValidity(cb.checked?"":valMsg);cb.addEventListener("change",function(){cb.setCustomValidity(cb.checked?"":valMsg)})});document.addEventListener("submit",function(e){var f=e.target;if(!f||f.tagName!=="FORM")return;var cb=f.querySelector(".privacy-consent-checkbox");if(!cb||cb.checked)return;e.preventDefault();e.stopImmediatePropagation();if(typeof window.zappyNotify==="function"){window.zappyNotify(valMsg,"error")}else if(typeof window.showNotification==="function"){window.showNotification(valMsg,"error")}else{var ex=document.querySelectorAll(".zappy-privacy-error");ex.forEach(function(el){el.remove()});var n=document.createElement("div");n.className="zappy-privacy-error";n.style.cssText="position:fixed;top:20px;right:20px;max-width:400px;padding:14px 18px;background:#f8d7da;color:#721c24;border:1px solid #f5c6cb;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,.15);z-index:10000;font-family:-apple-system,BlinkMacSystemFont,sans-serif;font-size:14px";n.textContent=valMsg;document.body.appendChild(n);setTimeout(function(){if(n.parentElement)n.remove()},6000)}cb.focus()},true)})();</script>
-<button type="submit" class="index-contact-submit-btn">שלחי הודעה</button>
+<button type="submit" class="index-contact-submit-btn" style="color: rgb(47, 42, 40) !important;" fdprocessedid="dme2fn" data-element-type="button" data-element-id="btn-1785065510751-6021zwn02" data-native-element="true">שלחי הודעה</button>
             <p class="index-contact-privacy">המידע שלך שמור אצלי בסודיות מוחלטת.</p>
           </form>
         </div>

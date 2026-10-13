@@ -5269,6 +5269,10 @@ div[id*="mic-access-tool-box"] button[class*="reset"] * {
 .index-testimonials-section .index-testimonials-card {
   background: #F5EDE4 !important;
 }
+
+.index-testimonials-section .index-testimonials-card {
+  background: #FBF8F4 !important;
+}
 /* mobile-submenu-overflow-fix */
 @media (max-width: 768px) {
   .navbar .sub-menu.mobile-expanded,
